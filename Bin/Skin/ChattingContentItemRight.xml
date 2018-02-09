@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+  <ListContainerElement height="50" >
+    <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
+      <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
+      <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
+        <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
+      </VerticalLayout>
+      <VerticalLayout width="60" inset="10,8,10,7">
+        <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
+      </VerticalLayout>
+    </HorizontalLayout>
+  </ListContainerElement>
+</Window>

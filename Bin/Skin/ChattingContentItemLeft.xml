@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+  <ListContainerElement height="50">
+    <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
+      <VerticalLayout width="60">
+        <Button float="true" pos="10,10,0,0" width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
+      </VerticalLayout>
+      <VerticalLayout float="true" pos="50,8,0,0" width="50" height="40" bkimage="file='Chat_FriendBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
+        <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
+      </VerticalLayout>
+    </HorizontalLayout>
+  </ListContainerElement>
+</Window>
