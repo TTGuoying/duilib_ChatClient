@@ -34,7 +34,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -49,7 +49,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -64,7 +64,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -79,7 +79,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -94,7 +94,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -109,7 +109,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -124,7 +124,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -139,7 +139,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -154,7 +154,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -169,7 +169,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="谭国颖" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -184,7 +184,7 @@
                 <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
               </VerticalLayout>
               <VerticalLayout width="130">
-                <Label name="UserName" text="黄庆麟" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
                 <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
               </VerticalLayout>
               <VerticalLayout  width="50">
@@ -201,7 +201,7 @@
       <VerticalLayout> <!-- 聊天区域 -->
         <HorizontalLayout height="60" bkcolor="#FFEFEFEF"> <!-- 标题栏 -->
           <VerticalLayout inset="15,15,15,15">
-            <Label text="谭国颖" extcolor="#FF000000" font="2" />
+            <Label text="Frined" extcolor="#FF000000" font="2" />
           </VerticalLayout> <!-- 占空位，占据左边所有的空位-->
           <VerticalLayout width="80"> <!-- 右边三个控件所占的宽度-->
             <Button name="minbtn" tooltip="最小化" float="true" pos="0,0,24,24"  width="24" normalimage=" file='TopBar_Narrow_Btn.png' " hotimage=" file='TopBar_Narrow_Btn_Hover.png' " pushedimage=" file='TopBar_Narrow_Btn_Click.png' "/>
