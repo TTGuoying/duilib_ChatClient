@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChatMainWnd.cpp" />
+    <ClCompile Include="Common.h" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SessionList.cpp" />
     <ClCompile Include="stdafx.cpp" />

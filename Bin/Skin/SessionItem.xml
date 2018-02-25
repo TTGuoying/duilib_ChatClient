@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-  <ListContainerElement height="60" width="250">
+  <ListContainerElement name="SessionItem" height="60" width="250">
     <HorizontalLayout float="false" bkcolor="#E0E0E0">
       <VerticalLayout width="60">
         <Button name="HeaderImg" float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>

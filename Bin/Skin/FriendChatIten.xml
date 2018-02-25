@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-  <ListContainerElement minwidth="250" maxwidth="800" >
-    <HorizontalLayout bkcolor="#F5F5F5">
+  <ListContainerElement name="MsgItem" height="100">
+    <HorizontalLayout>
+
       <VerticalLayout width="60">
-        <Button name="HeaderImg" float="true" pos="15,10,0,0" width="35" height = "35" enabled="false"/>
+        <Button name="HeaderImg" float="true" pos="16,10,0,0" width="35" height = "35" normalimage=" file='default.jpg' " enabled="false"/>
       </VerticalLayout>
-      <VerticalLayout float="true" pos="55,8,0,0" width="50" height="40" bkimage="file='Chat_FriendBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-        <RichEdit name="view_richedit" text="你好你好你好你好你好你好你好你好你好你好你好你好你好" multiline="true" rich="true" font="1" readonly="true" />
+
+      <VerticalLayout name="MsgContainer" float="true" pos="55,8,0,0" width="200" height="90" bkimage="file='Chat_FriendBubble.png' corner='18,28,11,11'" inset="13,7,8,7">
+        <RichEdit name="Message" text="a123你好你好1234你好你好你好a123你好你好1234你好你好你好" multiline="true" rich="true" font="1" readonly="true" />
       </VerticalLayout>
+
     </HorizontalLayout>
   </ListContainerElement>
 </Window>

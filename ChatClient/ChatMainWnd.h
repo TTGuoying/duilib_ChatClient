@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "SessionList.h"
+#include "Common.h"
 
 class ChatMainWnd : public WindowImplBase
 {
@@ -28,10 +28,15 @@ public:
 	void OnSelectChanged(TNotifyUI& msg);
 	void OnItemClick(TNotifyUI& msg);
 
+private:
+	CListContainerElementUI * CreateSessionItem(SessionItemInfo *item);
+	CListContainerElementUI * CreateChatMsgItem(ChatMsgItem *item, bool myself = true);
+
 	CButtonUI *btnClose;
 	CButtonUI *btnMax;
 	CButtonUI *btnRestore;
 	CButtonUI *btnMin;
-	SessionList *sessionList;
+	CListUI *sessionList;
+	CListUI *chatRoom;
 };
 
