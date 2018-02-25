@@ -50,7 +50,7 @@
                 <Button name="ScrShot" tooltip="截图" float="true" pos="85,0,0,0" width="44" height="29" normalimage=" file='Chat_Screenshot_Icon.png' " hotimage=" file='Chat_Screenshot_Icon_Hover.png' " pushedimage=" file='Chat_Screenshot_Icon_Active.png' "/>
             </HorizontalLayout>
             <HorizontalLayout height="120" bkcolor="#FFFFFFFF" inset="15,0,15,1"> <!--输入区域-->
-              <RichEdit name="InputBox" height="90" multiline="true" wantctrlreturn="true" wantreturn="false" vscrollbar="true" autovscroll="true" rich="true" font="1"/>
+              <RichEdit name="InputBox" height="90" wantctrlreturn="true" multiline="true" wantreturn="false" vscrollbar="true" autovscroll="true" rich="true" font="1"/>
             </HorizontalLayout>
             <HorizontalLayout height="30" bkcolor="#FFFFFFFF">
               <VerticalLayout />
