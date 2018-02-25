@@ -127,18 +127,25 @@
   <ItemGroup>
     <ClCompile Include="ChatMainWnd.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SessionList.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatMainWnd.h" />
+    <ClInclude Include="SessionList.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Bin\Skin\ChatMain.xml" />
-    <Xml Include="..\Bin\Skin\ChattingContactItem.xml" />
-    <Xml Include="..\Bin\Skin\ChattingContentItemLeft.xml" />
-    <Xml Include="..\Bin\Skin\ChattingContentItemRight.xml" />
-    <Xml Include="..\Bin\Skin\test.xml" />
+    <Xml Include="..\Bin\Skin\ChatMain.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\Bin\Skin\FriendChatIten.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\Bin\Skin\MyselfChatItem.xml" />
+    <Xml Include="..\Bin\Skin\SessionItem.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

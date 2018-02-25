@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Window size="950,640" mininfo="600,400" caption="0,0,0,60" sizebox="4,4,4,4"> <!-- 窗口的初始尺寸(宽800，高600)、窗口的最小尺寸(宽600，高400)、标题栏拖拽区域(高60)、可拖拽边框大小(这里添加sizebox后就可以拖拽边框调整大小了) -->
+<Window size="960,640" mininfo="600,400" caption="0,0,0,60" sizebox="4,4,4,4"> <!-- 窗口的初始尺寸(宽800，高600)、窗口的最小尺寸(宽600，高400)、标题栏拖拽区域(高60)、可拖拽边框大小(这里添加sizebox后就可以拖拽边框调整大小了) -->
   <Font id="0" name="微软雅黑" size="15" bold="false"/>
   <Font id="1" name="微软雅黑" size="13"/>
   <Font id="2" name="微软雅黑" size="18" />
-
-  <HorizontalLayout bkcolor="#FFF5F5F5"  bordersize="1,0,2,2" bordercolor="#FFF5F5F5" inset="0,0,1,0">
+  <Default name="VScrollBar" value="scroll_auto_hidden=&quot;true&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; scrollbarsize=&quot;9&quot; scrollbarfloat=&quot;false&quot; thumbnormalimage=&quot;file='scrollbar.png' source='0,0,9,8' corner='0,3,0,3'&quot; thumbhotimage=&quot;file='scrollbar.png' source='0,0,9,8' corner='0,3,0,3'&quot; thumbpushedimage=&quot;file='scrollbar.png' source='0,0,9,8' corner='0,3,0,3'&quot; "/>
+  
+  <HorizontalLayout bkcolor="#FFF5F5F5"  bordersize="1,1,2,2" bordercolor="#FF555555" inset="1,1,1,1">
     <!-- 整个窗口的背景色 -->
     <VerticalLayout width="60" bkcolor="#FF222222"> <!--左 头像区域 -->
       <HorizontalLayout>
-        <Button name="MyHeadImg" float="true" pos="15,15,45,45" width="30" height = "30" normalimage=" file='default.png' " />
-        <Button name="Chatting" float="true" pos="15,70,45,100" width="30" height = "30" bkcolor="#FFFFFFFF" />
-        <Button name="Contacts" float="true" pos="15,120,45,150" width="30" height = "30" bkcolor="#FFFFFFFF" />
-        <Button name="Favorites" float="true" pos="15,170,45,200" width="30" height = "30" bkcolor="#FFFFFFFF" />
+        <Button name="MyHeadImg" float="true" pos="12,12,47,47" width="36" height = "36" normalimage=" file='default.jpg' "/>
+        <Option name="Chatting" float="true" pos="18,73,42,97" width="24" height = "24" group="true" selected="true" normalimage=" file='recent_btn_nor.png' " hotimage="recent_btn_pressed" selectedimage="file='recent_btn_pressed.png' "/>
+        <Option name="Contacts" float="true" pos="18,123,42,147" width="24" height = "24" group="true" normalimage=" file='contact_btn_nor.png' " hotimage="contact_btn_pressed" selectedimage="file='contact_btn_pressed.png' "/>
       </HorizontalLayout>
       <HorizontalLayout height="60">
-        <Button name="Setting" float="true" pos="15,15,45,45" width="30" height = "30" bkcolor="#FFFFFFFF" />
+        <Button name="Setting" float="true" pos="12,12,47,47" width="36" height = "36" normalimage=" file='TabBar_Setting_Btn.png' " hotimage=" file='TabBar_Setting_Btn_Click.png' " pushedimage=" file='TabBar_Setting_Btn_Hover.png' "/>
       </HorizontalLayout>
     </VerticalLayout>
 
@@ -26,199 +26,38 @@
         </VerticalLayout>
       </HorizontalLayout>
 
-      <VerticalLayout> <!-- 联系人区域 -->
-        <List name="ChattingList" text="" vscrollbar="true" hscrollbar="true" tooltip="" float="false" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFD0D0D0" itemhotbkcolor="#FFE0E0E0" header="hidden">
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-          <ListContainerElement height="60">
-            <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#E0E0E0">
-              <VerticalLayout width="60">
-                <Button float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
-              </VerticalLayout>
-              <VerticalLayout width="130">
-                <Label name="UserName" text="Frined" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
-                <Label name="ChatContent" text="你好" textcolor="#FF888888" font="1" float="true" pos="0,33,130,53"/>
-              </VerticalLayout>
-              <VerticalLayout  width="50">
-                <Label name="down_size" align="right" text="18:00:00" textcolor="#FFAAAAAA" float="true" pos="0,10,50,30"/>
-                <Button text="111" align="right" textcolor="#FFAAAAAA" showhtml="true"  float="true" pos="0,29,50,49" enabled="false"/>
-              </VerticalLayout>
-            </HorizontalLayout>
-          </ListContainerElement>
-        </List>
+      <VerticalLayout> <!-- 会话/好友 列表区域 -->
+        <SessionList name="SessionList" vscrollbar="true" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFD0D0D0" itemhotbkcolor="#FFE0E0E0" header="hidden"/>
+        
       </VerticalLayout>
     </VerticalLayout>
 
     <VerticalLayout> <!--右 聊天区域 -->
       <VerticalLayout> <!-- 聊天区域 -->
         <HorizontalLayout height="60" bkcolor="#FFEFEFEF"> <!-- 标题栏 -->
-          <VerticalLayout inset="15,15,15,15">
-            <Label text="Frined" extcolor="#FF000000" font="2" />
+          
+          <VerticalLayout inset="15,15,15,15"> <!--当前聊天的名字-->
+            <Label name="ChatNickName" text="Friend" textcolor="#FF000000" font="2" />
           </VerticalLayout> <!-- 占空位，占据左边所有的空位-->
+          
           <VerticalLayout width="80"> <!-- 右边三个控件所占的宽度-->
             <Button name="minbtn" tooltip="最小化" float="true" pos="0,0,24,24"  width="24" normalimage=" file='TopBar_Narrow_Btn.png' " hotimage=" file='TopBar_Narrow_Btn_Hover.png' " pushedimage=" file='TopBar_Narrow_Btn_Click.png' "/>
             <Button name="maxbtn"   tooltip="最大化" float="true" pos="28,0,52,24" width="24" normalimage=" file='TopBar_Full_Btn.png' " hotimage=" file='TopBar_Full_Btn_Hover.png' " pushedimage=" file='TopBar_Full_Btn_Click.png' " />
             <Button name="restorebtn" visible="false" tooltip="还原" float="true" pos="28,0,52,24" width="24" normalimage=" file='TopBar_Window_Btn.png' " hotimage=" file='TopBar_Window_Btn_Hover.png' " pushedimage=" file='TopBar_Window_Btn_Click.png' " />
             <Button name="closebtn" tooltip="关闭"   float="true" pos="56,0,80,24" width="24" normalimage=" file='TopBar_Close_Btn.png' " hotimage=" file='TopBar_Close_Btn_Hover.png' " pushedimage=" file='TopBar_Close_Btn_Click.png' "/>
           </VerticalLayout>
+        
         </HorizontalLayout> <!-- 标题栏 -->
 
         <HorizontalLayout> <!-- 聊天显示 -->
-          <List name="ChatContentList" text="" vscrollbar="true" hscrollbar="true" tooltip="" float="false" bkcolor="#FFF5F5F5" itemselectedbkcolor="#FFF5F5F5" itemhotbkcolor="#FFF5F5F5" header="hidden">
-            <ListContainerElement height="50">
+          <List name="ChatRoom" vscrollbar="true" float="false" bkcolor="#FFF5F5F5" itemselectedbkcolor="#FFF5F5F5" itemhotbkcolor="#FFF5F5F5" header="hidden">
+            
+            <ListContainerElement height="50"> 
               <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
                 <VerticalLayout width="60">
-                  <Button float="true" pos="10,10,0,0" width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
+                  <Button float="true" pos="15,10,0,0" width="35" height = "35" normalimage=" file='default.jpg' " enabled="false"/>
                 </VerticalLayout>
-                <VerticalLayout float="true" pos="50,8,0,0" width="50" height="40" bkimage="file='Chat_FriendBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
+                <VerticalLayout float="true" pos="55,8,0,0" width="50" height="40" bkimage="file='Chat_FriendBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
                   <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
                 </VerticalLayout>
               </HorizontalLayout>
@@ -231,142 +70,25 @@
                   <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
                 </VerticalLayout>
                 <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
+                  <Button width="35" height = "35" normalimage=" file='default.jpg' " enabled="false"/>
                 </VerticalLayout>
               </HorizontalLayout>
             </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
+            
+            <ListContainerElement height="100"> 
+              <HorizontalLayout name="" >
+                
+                <VerticalLayout width="60">
+                  <Button float="true" pos="15,10,0,0" width="35" height = "35" normalimage=" file='default.jpg' " enabled="false"/>
                 </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
+                
+                <VerticalLayout float="true" pos="55,8,0,0" width="200" height="90" bkimage="file='Chat_FriendBubble.png' corner='18,28,11,11'" inset="13,7,8,7">
+                  <RichEdit name="view_richedit" text="a123你好你好1234你好你好你好a123你好你好1234你好你好你好" multiline="true" rich="true" font="1" readonly="true" />
                 </VerticalLayout>
+              
               </HorizontalLayout>
             </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
-
-            <ListContainerElement height="50" >
-              <HorizontalLayout name="" text="" tooltip="" float="false" bkcolor="#F5F5F5">
-                <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-                <VerticalLayout height="40" width="50" bkimage="file='Chat_MyselfBubble.png' corner='18,21,10,10'" inset="13,7,5,5">
-                  <RichEdit name="view_richedit" text="你好" multiline="true" rich="true" font="1" readonly="true" />
-                </VerticalLayout>
-                <VerticalLayout width="60" inset="10,8,10,7">
-                  <Button width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
-                </VerticalLayout>
-              </HorizontalLayout>
-            </ListContainerElement>
+          
           </List>
         </HorizontalLayout>
 
@@ -377,8 +99,14 @@
             <Button name="ScrShot" tooltip="截图" float="true" pos="85,0,0,0" width="44" height="29" normalimage=" file='Chat_Screenshot_Icon.png' " hotimage=" file='Chat_Screenshot_Icon_Hover.png' " pushedimage=" file='Chat_Screenshot_Icon_Active.png' "/>
           </VerticalLayout>
         </HorizontalLayout>
-        <HorizontalLayout height="120" bkcolor="#FFFFFFFF" inset="15,0,15,1"> <!-- 输入区域 -->
-          <RichEdit name="view_richedit" height="90" multiline="true" vscrollbar="true" autovscroll="true" rich="true" font="1"/>
+        <HorizontalLayout height="120" bkcolor="#FFFFFFFF" inset="15,0,15,1"> <!--输入区域-->
+          <RichEdit name="InputBox" height="90" multiline="true" vscrollbar="true" autovscroll="true" rich="true" font="1"/>
+        </HorizontalLayout>
+        <HorizontalLayout height="30" bkcolor="#FFFFFFFF">
+          <VerticalLayout />
+          <VerticalLayout width="100" >
+            <Button name="SendBtn" text="发送" tooltip="发送" float="true" pos="10,0,0,0" width="70" height="25" bkcolor="#FFEEEEEE" textcolor="#FF000000" font="0" />
+          </VerticalLayout>
         </HorizontalLayout>
       </VerticalLayout>
 

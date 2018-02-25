@@ -27,6 +27,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SessionList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatMainWnd.h">
@@ -35,21 +38,21 @@
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SessionList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Bin\Skin\ChatMain.xml">
       <Filter>XML</Filter>
     </Xml>
-    <Xml Include="..\Bin\Skin\ChattingContactItem.xml">
+    <Xml Include="..\Bin\Skin\SessionItem.xml">
       <Filter>XML</Filter>
     </Xml>
-    <Xml Include="..\Bin\Skin\ChattingContentItemLeft.xml">
+    <Xml Include="..\Bin\Skin\FriendChatIten.xml">
       <Filter>XML</Filter>
     </Xml>
-    <Xml Include="..\Bin\Skin\ChattingContentItemRight.xml">
-      <Filter>XML</Filter>
-    </Xml>
-    <Xml Include="..\Bin\Skin\test.xml">
+    <Xml Include="..\Bin\Skin\MyselfChatItem.xml">
       <Filter>XML</Filter>
     </Xml>
   </ItemGroup>

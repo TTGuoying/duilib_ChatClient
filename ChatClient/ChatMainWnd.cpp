@@ -9,7 +9,7 @@ DUI_END_MESSAGE_MAP()
 
 ChatMainWnd::ChatMainWnd()
 {
-
+	//sessionList = new SessionList(m_PaintManager);
 }
 
 
@@ -39,6 +39,16 @@ CDuiString ChatMainWnd::GetSkinFile()
 CDuiString ChatMainWnd::GetZIPFileName() const
 {
 	return L"Skin.zip";
+}
+
+CControlUI * ChatMainWnd::CreateControl(LPCTSTR pstrClass)
+{
+	if (_tcsicmp(pstrClass, _T("SessionList")) == 0)
+	{
+		return new SessionList(m_PaintManager);
+	}
+
+	return NULL;
 }
 
 LPCTSTR ChatMainWnd::GetWindowClassName() const
@@ -105,8 +115,69 @@ LRESULT ChatMainWnd::OnChar(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHan
 	TCHAR pressChar = (TCHAR)wParam;
 	if (pressChar == VK_RETURN && TRUE /*焦点在输入框*/)
 	{
+		if (sessionList == NULL)
+		{
+			sessionList = static_cast<SessionList *>(m_PaintManager.FindControl(L"SessionList"));
+		}
+
+		SessionItemInfo *item = new SessionItemInfo;
+		item->headerImg = L"default.jpg";
+		item->nickName = L"Friend";
+		item->message = L"你好";
+		item->msgTime = L"18:00";
+		item->mute = true;
+		item->newMsg = true;
+		sessionList->Add(sessionList->AddItem(item));
 
 		bHandled = true;
+	}
+	else if (pressChar == 'a')
+	{
+		if (sessionList == NULL)
+		{
+			sessionList = static_cast<SessionList *>(m_PaintManager.FindControl(L"SessionList"));
+		}
+
+		SessionItemInfo *item = new SessionItemInfo;
+		item->headerImg = L"default.jpg";
+		item->nickName = L"Friend";
+		item->message = L"你好";
+		item->msgTime = L"18:00";
+		item->mute = true;
+		item->newMsg = false;
+		sessionList->Add(sessionList->AddItem(item));
+	}
+	else if (pressChar == 's')
+	{
+		if (sessionList == NULL)
+		{
+			sessionList = static_cast<SessionList *>(m_PaintManager.FindControl(L"SessionList"));
+		}
+
+		SessionItemInfo *item = new SessionItemInfo;
+		item->headerImg = L"default.jpg";
+		item->nickName = L"Friend";
+		item->message = L"你好";
+		item->msgTime = L"18:00";
+		item->mute = false;
+		item->newMsg = true;
+		sessionList->Add(sessionList->AddItem(item));
+	}
+	else if (pressChar == 'd')
+	{
+		if (sessionList == NULL)
+		{
+			sessionList = static_cast<SessionList *>(m_PaintManager.FindControl(L"SessionList"));
+		}
+
+		SessionItemInfo *item = new SessionItemInfo;
+		item->headerImg = L"default.jpg";
+		item->nickName = L"Friend";
+		item->message = L"你好";
+		item->msgTime = L"18:00";
+		item->mute = false;
+		item->newMsg = false;
+		sessionList->Add(sessionList->AddItem(item));
 	}
 	else
 	{
@@ -138,7 +209,7 @@ void ChatMainWnd::OnClick(TNotifyUI & msg)
 		SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 		return;
 	}
-	else if (msg.pSender == btnMin)
+	else if (msg.pSender == btnRestore)
 	{
 		SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0);
 		return;
@@ -147,6 +218,14 @@ void ChatMainWnd::OnClick(TNotifyUI & msg)
 
 void ChatMainWnd::OnSelectChanged(TNotifyUI & msg)
 {
+	if (msg.pSender->GetName() == L"Chatting")
+	{
+		//static_cast<CTabLayoutUI*>()
+	}
+	else if (msg.pSender->GetName() == L"Contacts")
+	{
+		//static_cast<CTabLayoutUI*>()
+	}
 }
 
 void ChatMainWnd::OnItemClick(TNotifyUI & msg)
