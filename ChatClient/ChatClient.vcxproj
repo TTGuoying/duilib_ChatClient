@@ -36,7 +36,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -127,12 +127,16 @@
   <ItemGroup>
     <ClCompile Include="ChatMainWnd.cpp" />
     <ClCompile Include="Common.h" />
+    <ClCompile Include="LoginWnd.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RegisterWnd.cpp" />
     <ClCompile Include="SessionList.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatMainWnd.h" />
+    <ClInclude Include="LoginWnd.h" />
+    <ClInclude Include="RegisterWnd.h" />
     <ClInclude Include="SessionList.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -143,10 +147,12 @@
     <Xml Include="..\Bin\Skin\FriendChatIten.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="..\Bin\Skin\LoginWnd.xml" />
     <Xml Include="..\Bin\Skin\MyselfChatItem.xml" />
     <Xml Include="..\Bin\Skin\SessionItem.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="..\Bin\Skin\RegistWnd.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

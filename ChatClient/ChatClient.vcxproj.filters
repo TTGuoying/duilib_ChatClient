@@ -33,6 +33,12 @@
     <ClCompile Include="Common.h">
       <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="LoginWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatMainWnd.h">
@@ -42,6 +48,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SessionList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterWnd.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,6 +68,12 @@
       <Filter>XML</Filter>
     </Xml>
     <Xml Include="..\Bin\Skin\MyselfChatItem.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\LoginWnd.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\RegistWnd.xml">
       <Filter>XML</Filter>
     </Xml>
   </ItemGroup>

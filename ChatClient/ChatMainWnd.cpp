@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ChatMainWnd.h"
+#include "LoginWnd.h"
 
 DUI_BEGIN_MESSAGE_MAP(ChatMainWnd, WindowImplBase)
 DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK, OnClick)
@@ -43,22 +44,7 @@ CDuiString ChatMainWnd::GetZIPFileName() const
 
 CControlUI * ChatMainWnd::CreateControl(LPCTSTR pstrClass)
 {
-	/*if (_tcsicmp(pstrClass, _T("SessionList")) == 0)
-	{
-		return new CListUI();
-	}
-	else if (_tcsicmp(pstrClass, _T("ChatRoom")) == 0)
-	{
-		return new CListUI();
-	}
-	else if (_tcsicmp(pstrClass, _T("ContactList")) == 0)
-	{
-		return new SessionList(m_PaintManager);
-	}
-	else if (_tcsicmp(pstrClass, _T("ContactDetail")) == 0)
-	{
-		return new SessionList(m_PaintManager);
-	}*/
+	
 	return NULL;
 }
 

@@ -14,9 +14,9 @@ public:
 	virtual CDuiString GetZIPFileName() const;
 	virtual CControlUI* CreateControl(LPCTSTR pstrClass);
 
-	LPCTSTR GetWindowClassName() const;
+	virtual LPCTSTR GetWindowClassName() const;
 	virtual void InitWindow();
-	void Notify(TNotifyUI &msg);
+	virtual void Notify(TNotifyUI &msg);
 
 	virtual LRESULT OnSysCommand(UINT msg, WPARAM wParam, LPARAM lParam, BOOL &bHandled);
 	virtual LRESULT OnMouseHover(UINT msg, WPARAM wParam, LPARAM lParam, BOOL &bHandled);

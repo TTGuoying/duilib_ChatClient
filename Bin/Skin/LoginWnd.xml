@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="400,300" caption="0,0,0,100" maxinfo="400,300">
+  <Font id="0" name="微软雅黑" size="15" bold="false"/>
+  <Font id="1" name="微软雅黑" size="24"/>
+  <Font id="2" name="微软雅黑" size="36" />
+
+  <VerticalLayout bordersize="1,1,2,2" bordercolor="#FF555555" inset="1,1,1,1"> <!--主窗口-->
+    <HorizontalLayout height="100" bkcolor="#FF8CCE5F"> <!--标题-->
+      <HorizontalLayout width="133"/>
+      <Label text="登 录" textcolor="#FFF5F5F5" font="2" width="150" align="center"/>
+      <Button name="btnclose" text="×" tooltip="关闭"  float="true" pos="373,0,397,30"  hotimage=" file='Btn_Red_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Red_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Red_Hover.png'  corner='5,10,5,10'" font="1"/>
+    </HorizontalLayout>
+
+    <HorizontalLayout bkcolor="#FFF5F5F5">
+      
+      <VerticalLayout inset="0,10, 30,0">
+        <HorizontalLayout height="30" inset="40,0, 0,">
+          <Label text="服务器IP：" textcolor="#FF000000" font="0" width="80" pos="5,5,0,0" align="right"/>
+          <Edit name="IPADDRESS" height="30" width="130" inset="5,5, 1,1" bkcolor="#FFFDFDFD" bordersize="1,1,1,1" focusbordercolor="#FF555555" font="0"/>
+          <Label text="  端口：" textcolor="#FF000000" font="0" width="50" pos="5,5,0,0" />
+          <Edit name="Port" height="30" width="60" inset="5,5, 1,1" bkcolor="#FFFDFDFD" bordersize="1,1,1,1" focusbordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+        <HorizontalLayout inset="40,15, 30,0">
+          <Label text="账号：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Account" height="35" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+        <HorizontalLayout inset="40,10, 30,0">
+          <Label text="密码：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Password" height="35" password="true" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+      </VerticalLayout>
+    </HorizontalLayout>
+    
+    <HorizontalLayout  bkcolor="#FFF5F5F5" height="50">
+      <Button name="SignUp" text="注册" textcolor="#FF000000" float="true" pos="60,0,0,0" width="120" height="40" normalimage=" file='Btn_NotClick.png'  corner='5,10,5,10'" hotimage=" file='Btn_Green_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Green_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Green_Hover.png'  corner='5,10,5,10'" font="0"/>
+      <Button name="SignIn" text="登录" textcolor="#FF000000" float="true" pos="220,0,0,0" width="120" height="40" normalimage=" file='Btn_NotClick.png'  corner='5,10,5,10'" hotimage=" file='Btn_Green_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Green_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Green_Hover.png'  corner='5,10,5,10'" font="0"/>
+    </HorizontalLayout>
+  </VerticalLayout> <!--主窗口-->
+</Window>
