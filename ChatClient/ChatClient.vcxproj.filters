@@ -27,16 +27,25 @@
     <ClCompile Include="Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SessionList.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Common.h">
       <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="LoginWnd.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RegisterWnd.cpp">
+    <ClCompile Include="ClientBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +56,22 @@
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SessionList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="LoginWnd.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RegisterWnd.h">
+    <ClInclude Include="ClientBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,9 +89,6 @@
       <Filter>XML</Filter>
     </Xml>
     <Xml Include="..\Bin\Skin\LoginWnd.xml">
-      <Filter>XML</Filter>
-    </Xml>
-    <Xml Include="..\Bin\Skin\RegistWnd.xml">
       <Filter>XML</Filter>
     </Xml>
   </ItemGroup>

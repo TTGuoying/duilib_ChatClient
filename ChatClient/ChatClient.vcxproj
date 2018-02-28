@@ -126,19 +126,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChatMainWnd.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="ClientBase.cpp" />
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Common.h" />
     <ClCompile Include="LoginWnd.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="RegisterWnd.cpp" />
-    <ClCompile Include="SessionList.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Task.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatMainWnd.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="ClientBase.h" />
     <ClInclude Include="LoginWnd.h" />
-    <ClInclude Include="RegisterWnd.h" />
-    <ClInclude Include="SessionList.h" />
+    <ClInclude Include="Protocol.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Bin\Skin\ChatMain.xml">
@@ -147,12 +153,13 @@
     <Xml Include="..\Bin\Skin\FriendChatIten.xml">
       <SubType>Designer</SubType>
     </Xml>
-    <Xml Include="..\Bin\Skin\LoginWnd.xml" />
+    <Xml Include="..\Bin\Skin\LoginWnd.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="..\Bin\Skin\MyselfChatItem.xml" />
     <Xml Include="..\Bin\Skin\SessionItem.xml">
       <SubType>Designer</SubType>
     </Xml>
-    <Xml Include="..\Bin\Skin\RegistWnd.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

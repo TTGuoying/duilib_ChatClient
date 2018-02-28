@@ -1,0 +1,16 @@
+#pragma once
+
+//Í¨ÐÅÐ­ÒéÖµ
+enum EM_PROTOCOL
+{
+	INVALID_PROTOCOL,			// ÎÞÐ§Öµ
+
+	//µÇÂ½							 
+	SIGNIN,                     // µÇÂ½
+	SIGNIN_SECCUSS,             // µÇÂ½³É¹¦
+	SIGNIN_FAILED,              // µÇÂ½Ê§°Ü
+	SIGNIN_ALREADY,             // µÇÂ½Ê§°Ü
+	SignUp,						// ×¢²á
+	SignUp_SECCUSS,             // ×¢²á³É¹¦
+	SignUp_FAILED,              // ×¢²áÊ§°Ü
+};

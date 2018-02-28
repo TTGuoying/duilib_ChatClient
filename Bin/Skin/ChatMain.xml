@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Window size="960,640" mininfo="600,400" caption="0,0,0,60" sizebox="4,4,4,4"> <!-- 窗口的初始尺寸(宽960，高600)、窗口的最小尺寸(宽600，高400)、标题栏拖拽区域(高60)、可拖拽边框大小(这里添加sizebox后就可以拖拽边框调整大小了) -->
+<Window size="800,600" mininfo="600,400" caption="0,0,0,60" sizebox="4,4,4,4"> <!-- 窗口的初始尺寸(宽960，高600)、窗口的最小尺寸(宽600，高400)、标题栏拖拽区域(高60)、可拖拽边框大小(这里添加sizebox后就可以拖拽边框调整大小了) -->
   <Font id="0" name="微软雅黑" size="15" bold="false"/>
   <Font id="1" name="微软雅黑" size="13"/>
   <Font id="2" name="微软雅黑" size="18" />
   <Default name="VScrollBar" value="scroll_auto_hidden=&quot;true&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; scrollbarsize=&quot;9&quot; scrollbarfloat=&quot;false&quot; thumbnormalimage=&quot;file='scrollbar.png' source='0,0,9,8' corner='0,3,0,3'&quot; thumbhotimage=&quot;file='scrollbar.png' source='0,0,9,8' corner='0,3,0,3'&quot; thumbpushedimage=&quot;file='scrollbar.png' source='0,0,9,8' corner='0,3,0,3'&quot; "/>
   
-  <HorizontalLayout bkcolor="#FFF5F5F5"  bordersize="1,1,2,2" bordercolor="#FF555555" inset="1,1,1,1"> <!--主窗口-->
+  <HorizontalLayout bkcolor="#FFF5F5F5"  bordersize="1,1,1,1" bordercolor="#FF555555" inset="1,1,1,1"> <!--主窗口-->
     
     <VerticalLayout width="60" bkcolor="#FF222222"> <!--左 头像区域 -->
       <HorizontalLayout>

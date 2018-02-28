@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "ChatMainWnd.h"
 #include "LoginWnd.h"
 
@@ -10,7 +9,7 @@ DUI_END_MESSAGE_MAP()
 
 ChatMainWnd::ChatMainWnd()
 {
-	//sessionList = new SessionList(m_PaintManager);
+	
 }
 
 
@@ -44,7 +43,6 @@ CDuiString ChatMainWnd::GetZIPFileName() const
 
 CControlUI * ChatMainWnd::CreateControl(LPCTSTR pstrClass)
 {
-	
 	return NULL;
 }
 
