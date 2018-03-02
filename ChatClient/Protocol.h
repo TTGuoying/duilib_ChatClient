@@ -13,4 +13,9 @@ enum EM_PROTOCOL
 	SignUp,						// 注册
 	SignUp_SECCUSS,             // 注册成功
 	SignUp_FAILED,              // 注册失败
+
+	// 好友
+	GET_FRIENDS,				// 获取好友
+	SEARCH_FRIENDS,				// 查找好友
+	FRIENDS_REQUEST,			// 添加好友请求
 };

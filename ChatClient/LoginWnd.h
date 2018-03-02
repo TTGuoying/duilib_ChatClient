@@ -23,7 +23,6 @@ public:
 	virtual void OnFinalMessage(HWND hWnd);
 
 	void ShowTip(CDuiString tips = L"", BOOL bBarning = FALSE);
-	Client * client;
 	void Connect();
 	void SetSignInBtnEnable(BOOL enable = TRUE);
 	void SetSignUpBtnEnable(BOOL enable = TRUE);
@@ -32,6 +31,8 @@ public:
 
 	HANDLE signInEvent;
 	HANDLE signUpEvent;
+	HANDLE stopEvent;
+	Client * client;
 private:
 	ThreadPool *threadPool;
 
@@ -52,7 +53,7 @@ private:
 	CButtonUI * btnBack;
 	CButtonUI * btnOK;
 
-	int		headImg;
+	int		headerImg;
 	CEditUI *edSignUpAccount;
 	CEditUI *edSignUpPassword;
 	CEditUI *edSignUpPassword2;

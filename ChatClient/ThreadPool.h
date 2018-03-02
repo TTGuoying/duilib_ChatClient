@@ -14,8 +14,7 @@ Date: 2018/02/19 23:15
 ==========================================================================
 */
 #pragma once
-#include "stdafx.h"
-#include "Common.h"
+#include <Windows.h>
 #include <list>
 #include <queue>
 #include <memory>
@@ -26,8 +25,8 @@ using std::shared_ptr;
 
 #define THRESHOLE_OF_WAIT_TASK  20
 
-typedef int(*TaskFun)(PVOID param);				// 任务函数
-typedef void(*TaskCallbackFun)(int result);		// 回调函数
+typedef int(*TaskFun)(WPARAM wParam, LPARAM lParam); // 任务函数
+typedef void(*TaskCallbackFun)(int result);		     // 回调函数
 
 class ThreadPool
 {
@@ -40,7 +39,7 @@ private:
 		~Thread();
 
 		BOOL isBusy();													// 是否有任务在执行
-		void ExecuteTask(TaskFun task, PVOID param, TaskCallbackFun taskCallback);	// 执行任务
+		void ExecuteTask(TaskFun task, WPARAM wParam, LPARAM lParam, TaskCallbackFun taskCallback);	// 执行任务
 
 	private:
 		ThreadPool *threadPool;											// 所属线程池
@@ -48,7 +47,8 @@ private:
 		BOOL    exit;													// 是否退出
 		HANDLE  thread;													// 线程句柄
 		TaskFun	task;													// 要执行的任务
-		PVOID	param;													// 任务参数
+		WPARAM wParam;													// 任务参数
+		LPARAM lParam;													// 任务参数
 		TaskCallbackFun taskCb;											// 回调的任务
 		static unsigned int __stdcall ThreadProc(PVOID pM);				// 线程函数
 	};
@@ -64,17 +64,19 @@ private:
 	class WaitTask
 	{
 	public:
-		WaitTask(TaskFun task, PVOID param, TaskCallbackFun taskCb, BOOL bLong)
+		WaitTask(TaskFun task, WPARAM wParam, LPARAM lParam, TaskCallbackFun taskCb, BOOL bLong)
 		{
 			this->task = task;
-			this->param = param;
+			this->wParam = wParam;
+			this->lParam = lParam;
 			this->taskCb = taskCb;
 			this->bLong = bLong;
 		}
-		~WaitTask() { task = NULL; taskCb = NULL; bLong = FALSE; param = NULL; }
+		~WaitTask() { task = NULL; taskCb = NULL; bLong = FALSE; lParam = NULL;  lParam = NULL; }
 
 		TaskFun	task;					// 要执行的任务
-		PVOID param;					// 任务参数
+		WPARAM wParam;
+		LPARAM lParam;					// 任务参数
 		TaskCallbackFun taskCb;			// 回调的任务
 		BOOL bLong;						// 是否时长任务
 	};
@@ -120,7 +122,7 @@ public:
 	ThreadPool(size_t minNumOfThread = 2, size_t maxNumOfThread = 10);
 	~ThreadPool();
 
-	BOOL QueueTaskItem(TaskFun task, PVOID param, TaskCallbackFun taskCb = NULL, BOOL longFun = FALSE);	   // 任务入队
+	BOOL QueueTaskItem(TaskFun task, WPARAM wParam, LPARAM lParam, TaskCallbackFun taskCb = NULL, BOOL longFun = FALSE);	   // 任务入队
 
 private:
 	size_t getCurNumOfThread() { return getIdleThreadNum() + getBusyThreadNum(); }	// 获取线程池中的当前线程数

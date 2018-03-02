@@ -3,12 +3,14 @@
 #include "ChatMainWnd.h"
 
 LoginWnd::LoginWnd(Client *client, ThreadPool *threadPool)
+
 {
 	this->client = client;
 	this->threadPool = threadPool;
 	signInEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	signUpEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-	headImg = 1;
+	stopEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+	headerImg = 1;
 	sexulity = 1;
 	client->AssociateWnd(this);
 }
@@ -16,17 +18,20 @@ LoginWnd::LoginWnd(Client *client, ThreadPool *threadPool)
 
 LoginWnd::~LoginWnd()
 {
+	SetEvent(stopEvent);
 	CloseHandle(signInEvent);
 	CloseHandle(signUpEvent);
+	CloseHandle(stopEvent);
 }
 
 UILIB_RESOURCETYPE LoginWnd::GetResourceType() const
 {
-#ifdef _DEBUG
+//#ifdef _DEBUG
+//	return UILIB_FILE;
+//#else
+//	return UILIB_ZIP;
+//#endif // _DEBUG
 	return UILIB_FILE;
-#else
-	return UILIB_ZIP;
-#endif // _DEBUG
 }
 
 CDuiString LoginWnd::GetSkinFolder()
@@ -54,6 +59,49 @@ LPCTSTR LoginWnd::GetWindowClassName() const
 	return L"LoginWnd";
 }
 
+LRESULT LoginWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+
+	case WM_NCLBUTTONDBLCLK:   //禁止双击放大窗口
+		return 0;
+	case WM_USER_RECONNECT:		//重新连接服务器
+		threadPool->QueueTaskItem(Task::Connect, (WPARAM)this, NULL);
+		break;
+	case WM_USER_RECVDATA:		//收到数据
+		threadPool->QueueTaskItem(Task::ProcessRecvDate, wParam, (LPARAM)this);
+		break;
+	case WM_USER_SIGNIN_SUCESS:		//登录成功
+		client->user = (UserAndFriend *)wParam;
+		break;
+	case WM_USER_SIGNIN_FAIL:		//登录失败
+		SetEvent(signInEvent);
+		SetSignInBtnEnable();
+		ShowTip(L"登录失败，用户名或密码错误！", TRUE);
+		break;
+	case WM_USER_SIGNUP_SUCESS:		//注册成功
+		SignUpSuccess();
+		break;
+	case WM_USER_SIGNUP_FAIL:		//注册失败
+		SetEvent(signUpEvent);
+		SetSignUpBtnEnable();
+		ShowTip(L"注册失败，用户名已存在！", TRUE);
+		break;
+	case WM_USER_GET_FRIENDS:		//获取好友
+		if (lParam == 1)
+			SignInBtnSuccess();
+		else
+			client->friends.push_back((UserAndFriend *)wParam);
+		break;
+		
+	default:
+		break;
+	}
+
+	return __super::HandleMessage(uMsg, wParam, lParam);
+}
+
 void LoginWnd::InitWindow()
 {
 	btnClose = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"btnclose"));
@@ -69,6 +117,7 @@ void LoginWnd::InitWindow()
 
 	edIPAddress = static_cast<CEditUI *>(m_PaintManager.FindControl(L"IPAddress"));
 	ip = L"127.0.0.1";
+	//ip = L"118.24.1.202";
 	edIPAddress->SetText(ip);
 	edPort = static_cast<CEditUI *>(m_PaintManager.FindControl(L"Port"));
 	port = L"10240";
@@ -85,7 +134,7 @@ void LoginWnd::InitWindow()
 	edSignUpPhone = static_cast<CEditUI *>(m_PaintManager.FindControl(L"Phone"));
 	btnSignUp = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"SignUp"));
 
-	threadPool->QueueTaskItem(Task::Connect, this);
+	threadPool->QueueTaskItem(Task::Connect, (WPARAM)this, NULL);
 }
 
 void LoginWnd::Notify(TNotifyUI & msg)
@@ -99,21 +148,21 @@ void LoginWnd::Notify(TNotifyUI & msg)
 	}
 	if (msg.sType == DUI_MSGTYPE_SELECTCHANGED)
 	{
-		if (msg.pSender->GetName() == L"headImg1")
+		if (msg.pSender->GetName() == L"headerImg1")
 		{
-			headImg = 1;
+			headerImg = 1;
 		}
-		else if (msg.pSender->GetName() == L"headImg2")
+		else if (msg.pSender->GetName() == L"headerImg2")
 		{
-			headImg = 2;
+			headerImg = 2;
 		}
-		else if (msg.pSender->GetName() == L"headImg3")
+		else if (msg.pSender->GetName() == L"headerImg3")
 		{
-			headImg = 3;
+			headerImg = 3;
 		}
-		else if (msg.pSender->GetName() == L"headImg4")
+		else if (msg.pSender->GetName() == L"headerImg4")
 		{
-			headImg = 4;
+			headerImg = 4;
 		}
 	}
 	else if (msg.sType == L"click")
@@ -190,22 +239,22 @@ void LoginWnd::Notify(TNotifyUI & msg)
 			writer.StartObject();
 			writer.Key("protocol");
 			writer.Int(SignUp);
-			writer.Key("headImg");
-			writer.Int(headImg);
+			writer.Key("headerImg");
+			writer.Int(headerImg);
 			writer.Key("account");
-			writer.String(WcharToUtf8(edSignUpAccount->GetText()));
+			writer.String(WToA(edSignUpAccount->GetText()));
 			writer.Key("password");
-			writer.String(WcharToUtf8(edSignUpPassword->GetText()));
+			writer.String(WToA(edSignUpPassword->GetText()));
 			writer.Key("nickName");
-			writer.String(WcharToUtf8(edSignUpNickName->GetText()));
+			writer.String(WToA(edSignUpNickName->GetText()));
 			writer.Key("signature");
-			writer.String(WcharToUtf8(edSignUpSignature->GetText()));
+			writer.String(WToA(edSignUpSignature->GetText()));
 			writer.Key("sexulity");
 			writer.Int(sexulity);
 			writer.Key("area");
-			writer.String(WcharToUtf8(edSignUpAera->GetText()));
+			writer.String(WToA(edSignUpAera->GetText()));
 			writer.Key("phone");
-			writer.String(WcharToUtf8(edSignUpPhone->GetText()));
+			writer.String(WToA(edSignUpPhone->GetText()));
 			writer.EndObject();
 			const char *json = s.GetString();
 
@@ -215,8 +264,8 @@ void LoginWnd::Notify(TNotifyUI & msg)
 				return;
 			}
 
-			btnSignUp->SetEnabled(false);
-			threadPool->QueueTaskItem(Task::SignUpWait, this);
+			SetSignUpBtnEnable(false);
+			threadPool->QueueTaskItem(Task::SignUpWait, (WPARAM)this, NULL);
 			return;
 
 		}
@@ -274,9 +323,9 @@ void LoginWnd::Notify(TNotifyUI & msg)
 			writer.Key("protocol");
 			writer.Int(SIGNIN);
 			writer.Key("account");
-			writer.String(WcharToUtf8(edAccount->GetText()));
+			writer.String(WToA(edAccount->GetText()));
 			writer.Key("password");
-			writer.String(WcharToUtf8(edPassword->GetText()));
+			writer.String(WToA(edPassword->GetText()));
 			writer.EndObject();
 			const char *json = s.GetString();
 
@@ -285,51 +334,12 @@ void LoginWnd::Notify(TNotifyUI & msg)
 				ShowTip(L"发送失败，请检查网络连接！", true);
 				return;
 			}
-			btnSignUp->SetEnabled(false);
-			threadPool->QueueTaskItem(Task::SignInWait, this);
+			SetSignInBtnEnable(false);
+			threadPool->QueueTaskItem(Task::SignInWait, (WPARAM)this, NULL);
 			return;
 		}
 	}
 	return WindowImplBase::Notify(msg);
-}
-
-LRESULT LoginWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	RecvDateParam * param = NULL;
-	switch (uMsg)
-	{
-
-	case WM_NCLBUTTONDBLCLK:   //禁止双击放大窗口
-		return 0;
-	case WM_USER_RECONNECT:		//重新连接服务器
-		threadPool->QueueTaskItem(Task::Connect, this);
-		break;
-	case WM_USER_RECVDATA:		//收到数据
-		param = new RecvDateParam;
-		param->wnd = this;
-		param->data = (BYTE *)wParam;
-		threadPool->QueueTaskItem(Task::ProcessRecvDate, param);
-		break;
-	case WM_USER_SIGNIN_SUCESS:		//登录成功
-		SignInBtnSuccess();
-		break;
-	case WM_USER_SIGNIN_FAIL:		//登录失败
-		SetEvent(signInEvent);
-		ShowTip(L"登录失败，用户名或密码错误！", TRUE);
-		break;
-	case WM_USER_SIGNUP_SUCESS:		//注册成功
-		SignUpSuccess();
-		break;
-	case WM_USER_SIGNUP_FAIL:		//注册失败
-		SetEvent(signUpEvent);
-		ShowTip(L"注册失败，用户名已存在！", TRUE);
-		break;
-		
-	default:
-		break;
-	}
-
-	return __super::HandleMessage(uMsg, wParam, lParam);
 }
 
 void LoginWnd::OnFinalMessage(HWND hWnd)
@@ -369,7 +379,7 @@ void LoginWnd::SetSignUpBtnEnable(BOOL enable)
 void LoginWnd::SignInBtnSuccess()
 {
 	SetEvent(signInEvent);
-	Close(1);
+	Close(2);
 }
 
 void LoginWnd::SignUpSuccess()

@@ -1,6 +1,5 @@
-#include "stdafx.h"
 #include "Common.h"
-
+#include "stdafx.h"
 
 const char* WcharToUtf8(const wchar_t *pwStr)
 {
@@ -8,7 +7,6 @@ const char* WcharToUtf8(const wchar_t *pwStr)
 	{
 		return NULL;
 	}
-
 	int len = WideCharToMultiByte(CP_UTF8, 0, pwStr, -1, NULL, 0, NULL, NULL);
 	if (len <= 0)
 	{
@@ -34,6 +32,42 @@ const wchar_t* Utf8ToWchar(const char *pStr)
 	wchar_t *pwStr = new wchar_t[len];
 	MultiByteToWideChar(CP_UTF8, 0, pStr, -1, pwStr, len);
 	return pwStr;
+}
+
+char *WToA(LPCTSTR str)
+{
+	LPSTR pszOut = NULL;
+	if (str != NULL)
+	{
+		int len = wcslen(str);
+
+		len = WideCharToMultiByte(CP_ACP, 0, str, len, NULL, 0, 0, 0) + 2;
+		pszOut = new char[len];
+
+		if (pszOut)
+		{
+			memset(pszOut, 0x00, len);
+			WideCharToMultiByte(CP_ACP, 0, str, len, pszOut, len, 0, 0);
+		}
+	}
+	return pszOut;
+}
+
+LPWSTR AToW(const char* str)
+{
+	LPWSTR pszOut = NULL;
+	if (str != NULL)
+	{
+		int nOutputStrLen = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0) + 1;
+		pszOut = (LPWSTR)new char[nOutputStrLen];
+
+		if (pszOut)
+		{
+			ZeroMemory((void *)pszOut, nOutputStrLen);
+			MultiByteToWideChar(CP_ACP, 0, str, -1, pszOut, nOutputStrLen);;
+		}
+	}
+	return pszOut;
 }
 
 CDuiString GetInstancePath()

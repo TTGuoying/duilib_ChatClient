@@ -32,10 +32,10 @@ ThreadPool::~ThreadPool()
 	CloseHandle(stopEvent);
 }
 
-BOOL ThreadPool::QueueTaskItem(TaskFun task, PVOID param, TaskCallbackFun taskCb, BOOL longFun)
+BOOL ThreadPool::QueueTaskItem(TaskFun task, WPARAM wParam, LPARAM lParam, TaskCallbackFun taskCb, BOOL longFun)
 {
 	waitTaskLock.Lock();
-	WaitTask *waitTask = new WaitTask(task, param, taskCb, longFun);
+	WaitTask *waitTask = new WaitTask(task, wParam, lParam, taskCb, longFun);
 	waitTaskList.push_back(waitTask);
 	waitTaskLock.UnLock();
 	PostQueuedCompletionStatus(completionPort, 0, (DWORD)GET_TASK, NULL);
@@ -164,7 +164,7 @@ void ThreadPool::GetTaskExcute()
 
 	if (thread != NULL)
 	{
-		thread->ExecuteTask(waitTask->task, waitTask->param, waitTask->taskCb);
+		thread->ExecuteTask(waitTask->task, waitTask->wParam, waitTask->lParam, waitTask->taskCb);
 		delete waitTask;
 		MoveThreadToBusyList(thread);
 	}
@@ -217,11 +217,12 @@ BOOL ThreadPool::Thread::isBusy()
 	return busy;
 }
 
-void ThreadPool::Thread::ExecuteTask(TaskFun task, PVOID param, TaskCallbackFun taskCallback)
+void ThreadPool::Thread::ExecuteTask(TaskFun task, WPARAM wParam, LPARAM lParam, TaskCallbackFun taskCallback)
 {
 	busy = TRUE;
 	this->task = task;
-	this->param = param;
+	this->wParam = wParam;
+	this->lParam = lParam;
 	this->taskCb = taskCallback;
 	ResumeThread(thread);
 }
@@ -243,7 +244,7 @@ unsigned int ThreadPool::Thread::ThreadProc(PVOID pM)
 			continue;
 		}
 
-		int resulst = pThread->task(pThread->param);
+		int resulst = pThread->task(pThread->wParam, pThread->lParam);
 		if(pThread->taskCb)
 			pThread->taskCb(resulst);
 		WaitTask *waitTask = pThread->threadPool->GetTask();
@@ -257,7 +258,8 @@ unsigned int ThreadPool::Thread::ThreadProc(PVOID pM)
 		else
 		{
 			pThread->task = NULL;
-			pThread->param = NULL;
+			pThread->wParam = NULL;
+			pThread->lParam = NULL;
 			pThread->taskCb = NULL;
 			pThread->busy = FALSE;
 			pThread->threadPool->MoveBusyThreadToIdleList(pThread);

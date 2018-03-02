@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddFriendWnd.cpp" />
     <ClCompile Include="ChatMainWnd.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientBase.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddFriendWnd.h" />
     <ClInclude Include="ChatMainWnd.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientBase.h" />
@@ -147,10 +149,16 @@
     <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="..\Bin\Skin\AddFriendWnd.xml">
+      <SubType>Designer</SubType>
+    </Xml>
     <Xml Include="..\Bin\Skin\ChatMain.xml">
       <SubType>Designer</SubType>
     </Xml>
     <Xml Include="..\Bin\Skin\FriendChatIten.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\Bin\Skin\FriendItem.xml">
       <SubType>Designer</SubType>
     </Xml>
     <Xml Include="..\Bin\Skin\LoginWnd.xml">

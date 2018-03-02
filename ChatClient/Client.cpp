@@ -4,11 +4,13 @@
 Client::Client()
 {
 	wnd = NULL;
+	user = NULL;
 }
 
 
 Client::~Client()
 {
+	RELEASE(user);
 }
 
 void Client::OnConnectionClosed()

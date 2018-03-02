@@ -1,5 +1,7 @@
 #include "ChatMainWnd.h"
 #include "LoginWnd.h"
+#include "AddFriendWnd.h"
+#include "Task.h"
 
 DUI_BEGIN_MESSAGE_MAP(ChatMainWnd, WindowImplBase)
 DUI_ON_MSGTYPE(DUI_MSGTYPE_CLICK, OnClick)
@@ -7,9 +9,13 @@ DUI_ON_MSGTYPE(DUI_MSGTYPE_SELECTCHANGED, OnSelectChanged)
 DUI_ON_MSGTYPE(DUI_MSGTYPE_ITEMCLICK, OnItemClick)
 DUI_END_MESSAGE_MAP()
 
-ChatMainWnd::ChatMainWnd()
+ChatMainWnd::ChatMainWnd(Client *client, ThreadPool *threadPool)
 {
-	
+	this->client = client;
+	this->threadPool = threadPool;
+	client->AssociateWnd(this);
+	addFriendWnd = NULL;
+	client->AssociateWnd(this);
 }
 
 
@@ -19,11 +25,12 @@ ChatMainWnd::~ChatMainWnd()
 
 UILIB_RESOURCETYPE ChatMainWnd::GetResourceType() const
 {
-#ifdef _DEBUG
+//#ifdef _DEBUG
+//	return UILIB_FILE;
+//#else
+//	return UILIB_ZIP;
+//#endif // _DEBUG
 	return UILIB_FILE;
-#else
-	return UILIB_ZIP;
-#endif // _DEBUG
 }
 
 CDuiString ChatMainWnd::GetSkinFolder()
@@ -57,8 +64,19 @@ void ChatMainWnd::InitWindow()
 	btnMax = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"maxbtn"));
 	btnRestore = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"restorebtn"));
 	btnMin = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"minbtn"));
+	btnAddFriend = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"AddFriend"));
+
+	CButtonUI *myHeaderImg = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"MyheaderImg"));
+	CString str;
+	str.Format(L"HeaderImg%1d.png", client->user->headerImg);
+	myHeaderImg->SetBkImage(str);
+	str.Format(L"%s %s", client->user->nickName, client->user->account);
+	myHeaderImg->SetToolTip(str);
+
 	sessionList = static_cast<CListUI *>(m_PaintManager.FindControl(L"SessionList"));
 	chatRoom = static_cast<CListUI *>(m_PaintManager.FindControl(L"ChatRoom"));
+	FriendList = static_cast<CListUI *>(m_PaintManager.FindControl(L"ContactList"));
+	
 
 	SessionItemInfo *item = new SessionItemInfo;
 	item->headerImg = L"default.jpg";
@@ -69,12 +87,85 @@ void ChatMainWnd::InitWindow()
 	item->newMsg = false;
 	sessionList->Add(CreateSessionItem(item));
 
+	for (auto it = client->friends.begin(); it != client->friends.end(); it++)
+	{
+		UserAndFriend *item = *it;
+		FriendList->Add(CreateFrientItem(item));
+	}
+}
+
+LRESULT ChatMainWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case WM_USER_RECVDATA:
+		threadPool->QueueTaskItem(Task::ProcessRecvDate, wParam, (LPARAM)this);
+		return 0;
+	case WM_USER_SEARCH_FRIEND:
+		addFriendWnd->SendMessageW(WM_USER_SEARCH_FRIEND, wParam, lParam);
+		return 0;
+	case 11111:
+		
+		return 0;
+	default:
+		break;
+	}
+
+	return __super::HandleMessage(uMsg, wParam, lParam);
 }
 
 void ChatMainWnd::Notify(TNotifyUI & msg)
 {
-	
+
+	if (msg.sType == DUI_MSGTYPE_ITEMDBCLICK)
+	{
+		return WindowImplBase::Notify(msg);
+	}
+	if (msg.sType == L"itemactivate")	//ÏìÓ¦Ë«»÷
+	{
+		return WindowImplBase::Notify(msg);
+	}
 	return WindowImplBase::Notify(msg);
+}
+
+void ChatMainWnd::OnClick(TNotifyUI & msg)
+{
+	if (msg.pSender == btnAddFriend)
+	{
+		if (addFriendWnd == NULL)
+		{
+			addFriendWnd = new AddFriendWnd(this, client, threadPool);
+			if (addFriendWnd == NULL)
+				return ;
+			addFriendWnd->Create(NULL, _T("Ìí¼ÓºÃÓÑ"), UI_WNDSTYLE_FRAME | WS_POPUP, NULL, 0, 0, 0, 0);
+		}
+
+		addFriendWnd->CenterWindow();
+		addFriendWnd->ShowWindow();
+
+		return;
+	}
+	else if (msg.pSender == btnClose)
+	{
+		::PostQuitMessage(0);
+		Close();
+		return;
+	}
+	else if (msg.pSender == btnMin)
+	{
+		SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0);
+		return;
+	}
+	else if (msg.pSender == btnMax)
+	{
+		SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+		return;
+	}
+	else if (msg.pSender == btnRestore)
+	{
+		SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0);
+		return;
+	}
 }
 
 LRESULT ChatMainWnd::OnSysCommand(UINT msg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
@@ -83,6 +174,7 @@ LRESULT ChatMainWnd::OnSysCommand(UINT msg, WPARAM wParam, LPARAM lParam, BOOL &
 	if (wParam == SC_CLOSE)
 	{
 		::PostQuitMessage(0);
+		Close();
 		bHandled = TRUE;
 		return 0;
 	}
@@ -224,32 +316,7 @@ LRESULT ChatMainWnd::OnChar(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHan
 
 void ChatMainWnd::OnFinalMessage(HWND hWnd)
 {
-	__super::OnFinalMessage(hWnd);
-	delete this;
-}
-
-void ChatMainWnd::OnClick(TNotifyUI & msg)
-{
-	if (msg.pSender == btnClose)
-	{
-		::PostQuitMessage(0);
-		return;
-	}
-	else if (msg.pSender == btnMin)
-	{
-		SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0);
-		return;
-	}
-	else if (msg.pSender == btnMax)
-	{
-		SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0);
-		return;
-	}
-	else if (msg.pSender == btnRestore)
-	{
-		SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0);
-		return;
-	}
+	WindowImplBase::OnFinalMessage(hWnd);
 }
 
 void ChatMainWnd::OnSelectChanged(TNotifyUI & msg)
@@ -265,6 +332,15 @@ void ChatMainWnd::OnSelectChanged(TNotifyUI & msg)
 }
 
 void ChatMainWnd::OnItemClick(TNotifyUI & msg)
+{
+	if (msg.pSender->GetName() == L"SessionItem")
+	{
+		int i = msg.pSender->GetTag();
+		static_cast<CTabLayoutUI*>(m_PaintManager.FindControl(L"ChatView"))->SetVisible();
+	}
+}
+
+void ChatMainWnd::OnItemDoubleClick(TNotifyUI & msg)
 {
 	if (msg.pSender->GetName() == L"SessionItem")
 	{
@@ -319,6 +395,33 @@ CListContainerElementUI * ChatMainWnd::CreateSessionItem(SessionItemInfo * item)
 			muteImg->SetVisible();
 		}
 	}
+	listElement->SetTag(1);
+	return listElement;
+}
+
+CListContainerElementUI * ChatMainWnd::CreateFrientItem(UserAndFriend * item)
+{
+	CListContainerElementUI *listElement = NULL;
+	CDialogBuilder dlgBuilder;
+	listElement = static_cast<CListContainerElementUI*>(dlgBuilder.Create(_T("FriendItem.xml"), (UINT)0, NULL, &m_PaintManager));
+
+	if (listElement == NULL)
+		return false;
+
+	CButtonUI *headerImg = static_cast<CButtonUI*>(m_PaintManager.FindSubControlByName(listElement, L"HeaderImg"));
+	if (headerImg)
+	{
+		CString str;
+		str.Format(L"HeaderImg%1d.png", item->headerImg);
+		headerImg->SetBkImage(str);
+	}
+
+	CLabelUI *nickName = static_cast<CButtonUI*>(m_PaintManager.FindSubControlByName(listElement, L"NickName"));
+	if (nickName)
+	{
+		nickName->SetText(item->nickName);
+	}
+
 	listElement->SetTag(1);
 	return listElement;
 }

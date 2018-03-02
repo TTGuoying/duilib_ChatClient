@@ -28,17 +28,17 @@ BOOL ClientBase::Start(LPCTSTR IPAddress, USHORT port)
 	serAddr.sin_family = AF_INET;
 	serAddr.sin_port = htons(port);
 
-	inet_pton(AF_INET, ::WcharToUtf8(IPAddress), &serAddr.sin_addr);
+	inet_pton(AF_INET, ::WToA(IPAddress), &serAddr.sin_addr);
 	if (connect(clientSock, (sockaddr *)&serAddr, sizeof(serAddr)) == SOCKET_ERROR)
 	{  //Á¬½ÓÊ§°Ü   
-		closesocket(clientSock);
+		RELEASE_SOCKET(clientSock);
 		WSACloseEvent(socketEvent);
 		CloseHandle(stopEvent);
 		return false;
 	}
 	if (0 != WSAEventSelect(clientSock, socketEvent, FD_READ | FD_CLOSE)) 
 	{
-		closesocket(clientSock);
+		RELEASE_SOCKET(clientSock);
 		WSACloseEvent(socketEvent);
 		CloseHandle(stopEvent);
 		return false;
@@ -96,14 +96,14 @@ DWORD ClientBase::RecvThreadProc(LPVOID lpParam)
 			WSAEnumNetworkEvents(client->clientSock, events[0], &networkEvent);
 			if (networkEvent.lNetworkEvents & FD_READ)
 			{
-				if (networkEvent.iErrorCode[FD_READ_BIT != 0])
+				if (networkEvent.iErrorCode[FD_READ_BIT] != 0)
 				{
 				    //Error
 				    continue;
 				}
 				char *buff = (char*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, 4096);
 				ret = recv(client->clientSock, buff, 4096, 0);
-				if (ret == 0 || (ret == SOCKET_ERROR && WSAGetLastError() == WSAECONNRESET))
+				if (ret > 4096 || ret == 0 || (ret == SOCKET_ERROR && WSAGetLastError() == WSAECONNRESET))
 				{
 					client->OnConnectionClosed();
 					client->bConnect = FALSE;

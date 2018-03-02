@@ -48,6 +48,9 @@
     <ClCompile Include="Task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AddFriendWnd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatMainWnd.h">
@@ -74,6 +77,9 @@
     <ClInclude Include="Protocol.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AddFriendWnd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Bin\Skin\ChatMain.xml">
@@ -89,6 +95,12 @@
       <Filter>XML</Filter>
     </Xml>
     <Xml Include="..\Bin\Skin\LoginWnd.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\FriendItem.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\AddFriendWnd.xml">
       <Filter>XML</Filter>
     </Xml>
   </ItemGroup>

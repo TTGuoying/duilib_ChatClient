@@ -1,13 +1,14 @@
 #include "Task.h"
 #include "LoginWnd.h"
+#include "AddFriendWnd.h"
 
-int Task::Connect(PVOID p)
+int Task::Connect(WPARAM wParam, LPARAM lParam)
 {
-	if (p == NULL)
+	if (wParam == NULL)
 		return 0;
-	LoginWnd *loginWnd = (LoginWnd*)p;
+	LoginWnd *loginWnd = (LoginWnd*)wParam;
 	
-	while (!loginWnd->client->IsConnect())
+	while (WaitForSingleObject(loginWnd->stopEvent, 0))
 	{
 		loginWnd->Connect();
 		if (!loginWnd->client->IsConnect())
@@ -19,16 +20,17 @@ int Task::Connect(PVOID p)
 		else
 		{
 			loginWnd->ShowTip(L"");
+			break;
 		}
 	}
 	return 1;
 }
 
-int Task::SignInWait(PVOID p)
+int Task::SignInWait(WPARAM wParam, LPARAM lParam)
 {
-	if (p == NULL)
+	if (wParam == NULL)
 		return 0;
-	LoginWnd *loginWnd = (LoginWnd*)p;
+	LoginWnd *loginWnd = (LoginWnd*)wParam;
 	int i = 0;
 	while (true)
 	{
@@ -64,11 +66,11 @@ int Task::SignInWait(PVOID p)
 	return 1;
 }
 
-int Task::SignUpWait(PVOID p)
+int Task::SignUpWait(WPARAM wParam, LPARAM lParam)
 {
-	if (p == NULL)
+	if (wParam == NULL)
 		return 0;
-	LoginWnd *loginWnd = (LoginWnd*)p;
+	LoginWnd *loginWnd = (LoginWnd*)wParam;
 	int i = 0;
 	while (true)
 	{
@@ -104,23 +106,22 @@ int Task::SignUpWait(PVOID p)
 	return 1;
 }
 
-int Task::ProcessRecvDate(PVOID p)
+int Task::ProcessRecvDate(WPARAM wParam, LPARAM lParam)
 {
-	if (p == NULL)
+	if (wParam == NULL || lParam == NULL)
 		return 0;
 
-	RecvDateParam *param = (RecvDateParam*)p;
+	BYTE *data = (BYTE *)wParam;
+	WindowImplBase *wnd = (WindowImplBase *)lParam;
 	Document document;
-	if (document.ParseInsitu((char *)param->data).HasParseError())
+	if (document.ParseInsitu((char *)data).HasParseError())
 	{
-		::HeapFree(::GetProcessHeap(), 0, param->data);
-		delete param;
+		::HeapFree(::GetProcessHeap(), 0, data);
 		return 0;
 	}
 	if (!(document.IsObject() && document.HasMember("protocol")))
 	{
-		::HeapFree(::GetProcessHeap(), 0, param->data);
-		delete param;
+		::HeapFree(::GetProcessHeap(), 0, data);
 		return 0;
 	}
 
@@ -128,30 +129,132 @@ int Task::ProcessRecvDate(PVOID p)
 	switch (protocol)
 	{
 	case SIGNIN_SECCUSS: // µÇÂ¼³É¹¦
-		SendMessage(param->wnd->GetHWND(), WM_USER_SIGNIN_SUCESS, 0, 0);
+	{
+		UserAndFriend *user = new UserAndFriend;
+		user->userID = document["userID"].GetInt();
+		user->account = AToW(document["account"].GetString());
+		user->headerImg = document["headerImg"].GetInt();
+		user->nickName = AToW(document["nickName"].GetString());
+		user->area = AToW(document["area"].GetString());
+		user->phone = AToW(document["phone"].GetString());
+		user->sexulity = document["sexulity"].GetInt();
+		user->signature = AToW(document["signature"].GetString());
+		SendMessage(wnd->GetHWND(), WM_USER_SIGNIN_SUCESS, (WPARAM)user, 0);
 		break;
+	}
 	case SIGNIN_FAILED: // µÇÂ¼Ê§°Ü
-		SendMessage(param->wnd->GetHWND(), WM_USER_SIGNIN_FAIL, 0, 0);
+		SendMessage(wnd->GetHWND(), WM_USER_SIGNIN_FAIL, 0, 0);
 		break;
 	case SIGNIN_ALREADY: // ±ðµÄµØ·½µÇÂ¼
 		break;
 	case SignUp_SECCUSS: // ×¢²á³É¹¦
-		SendMessage(param->wnd->GetHWND(), WM_USER_SIGNUP_SUCESS, 0, 0);
+		SendMessage(wnd->GetHWND(), WM_USER_SIGNUP_SUCESS, 0, 0);
 		break; 
 	case SignUp_FAILED: // ×¢²áÊ§°Ü
-		SendMessage(param->wnd->GetHWND(), WM_USER_SIGNUP_FAIL, 0, 0);
+		SendMessage(wnd->GetHWND(), WM_USER_SIGNUP_FAIL, 0, 0);
 			break;
-	case 100: // µÇÂ¼
+	case GET_FRIENDS: // »ñÈ¡ºÃÓÑ
+	{
+		const Value& friends = document["Friends"];
+		if (!friends.IsArray())
+		{
+			break;
+		}
+		for (SizeType i = 0; i < friends.Size(); i++)
+		{
+			UserAndFriend * user = new UserAndFriend;
+			user->userID = friends[i]["userID"].GetInt();
+			user->account = AToW(friends[i]["account"].GetString());
+			user->headerImg = friends[i]["headerImg"].GetInt();
+			user->nickName = AToW(friends[i]["nickName"].GetString());
+			user->area = AToW(friends[i]["area"].GetString());
+			user->phone = AToW(friends[i]["phone"].GetString());
+			user->sexulity = friends[i]["sexulity"].GetInt();
+			user->signature = AToW(friends[i]["signature"].GetString());
+			SendMessage(wnd->GetHWND(), WM_USER_GET_FRIENDS, (WPARAM)user, 0);
+		}
+		SendMessage(wnd->GetHWND(), WM_USER_GET_FRIENDS, 0, 1);
+		break;
+	}
+	case SEARCH_FRIENDS: // µÇÂ¼
+		if (document["result"].GetBool())
+		{
+			UserAndFriend * user = new UserAndFriend;
+			user->userID = document["userID"].GetInt();
+			user->account = AToW(document["account"].GetString());
+			user->headerImg = document["headerImg"].GetInt();
+			user->nickName = AToW(document["nickName"].GetString());
+			user->area = AToW(document["area"].GetString());
+			user->phone = AToW(document["phone"].GetString());
+			user->sexulity = document["sexulity"].GetInt();
+			user->signature = AToW(document["signature"].GetString());
+			SendMessage(wnd->GetHWND(), WM_USER_SEARCH_FRIEND, (WPARAM)user, 0);
+		}
+		else
+		{
+			SendMessage(wnd->GetHWND(), WM_USER_SEARCH_FRIEND, 0, 0);
+		}
+		break;
+	case 111: // µÇÂ¼
 
 		break;
-	case 101: // µÇÂ¼
+	case 1111: // µÇÂ¼
+
+		break;
+	case 11111: // µÇÂ¼
+
+		break;
+	case 111111: // µÇÂ¼
+
+		break;
+	case 111112: // µÇÂ¼
 
 		break;
 	default:
 		break;
 	}
 
-	::HeapFree(::GetProcessHeap(), 0, param->data);
-	delete param;
+	::HeapFree(::GetProcessHeap(), 0, data);
+	return 1;
+}
+
+int Task::SearchWait(WPARAM wParam, LPARAM lParam)
+{
+	if (wParam == NULL)
+		return 0;
+	AddFriendWnd *wnd = (AddFriendWnd*)wParam;
+
+	int i = 0;
+	while (true)
+	{
+		DWORD ret = WaitForSingleObject(wnd->searchEvent, 500);
+		if (ret == WAIT_TIMEOUT)
+		{
+			i++;
+			if (i % 3 == 1)
+			{
+				wnd->ShowTips(L"ÕýÔÚËÑË÷.");
+			}
+			else if (i % 3 == 2)
+			{
+				wnd->ShowTips(L"ÕýÔÚËÑË÷..");
+			}
+			else if (i % 3 == 0)
+			{
+				wnd->ShowTips(L"ÕýÔÚËÑË÷...");
+			}
+			if (i > 20)
+			{
+				wnd->ShowTips(L"ËÑË÷³¬Ê±", TRUE);
+				wnd->SetSearchBtnEnable();
+				break;
+			}
+		}
+		else
+		{
+			break;
+		}
+
+	}
 	return 1;
 }

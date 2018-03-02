@@ -9,7 +9,7 @@
     
     <VerticalLayout width="60" bkcolor="#FF222222"> <!--左 头像区域 -->
       <HorizontalLayout>
-        <Button name="MyHeadImg" float="true" pos="12,12,47,47" width="36" height = "36" normalimage=" file='default.jpg' "/>
+        <Button name="MyheaderImg" tooltip="" float="true" pos="12,12,47,47" width="36" height = "36"/>
         <Option name="Chatting" float="true" pos="18,73,42,97" width="24" height = "24" group="true" selected="true" normalimage=" file='recent_btn_nor.png' " hotimage="recent_btn_pressed" selectedimage="file='recent_btn_pressed.png' "/>
         <Option name="Contacts" float="true" pos="18,123,42,147" width="24" height = "24" group="true" normalimage=" file='contact_btn_nor.png' " hotimage="contact_btn_pressed" selectedimage="file='contact_btn_pressed.png' "/>
       </HorizontalLayout>
@@ -23,7 +23,7 @@
       <HorizontalLayout height="60" bkcolor="#FFEFEFEF"> <!--标题栏-->
         <HorizontalLayout width="250" bkcolor="#FFEFEFEF" > <!--搜索-->
           <Edit name="Search" float="true" text="搜索" pos="15,20,0,0" width="185" height = "25" font="1"/>
-          <Button name="Add" float="true" pos="210,20,235,45" width="25" height = "25" normalimage=" file='addSessionFriend.png' " />
+          <Button name="AddFriend" float="true" pos="210,20,235,45" width="25" height = "25" normalimage=" file='addSessionFriend.png' " />
         </HorizontalLayout> <!--搜索-->
         <HorizontalLayout height="60" bkcolor="#FFEFEFEF">
           <HorizontalLayout inset="15,15,15,15"> <!--当前聊天的名字-->
@@ -32,9 +32,9 @@
           <HorizontalLayout width="80">
             <!-- 右边三个控件所占的宽度-->
             <Button name="minbtn" tooltip="最小化" float="true" pos="0,0,24,24"  width="24" normalimage=" file='TopBar_Narrow_Btn.png' " hotimage=" file='TopBar_Narrow_Btn_Hover.png' " pushedimage=" file='TopBar_Narrow_Btn_Click.png' "/>
-            <Button name="maxbtn"   tooltip="最大化" float="true" pos="28,0,52,24" width="24" normalimage=" file='TopBar_Full_Btn.png' " hotimage=" file='TopBar_Full_Btn_Hover.png' " pushedimage=" file='TopBar_Full_Btn_Click.png' " />
+            <Button name="maxbtn" tooltip="最大化" float="true" pos="28,0,52,24" width="24" normalimage=" file='TopBar_Full_Btn.png' " hotimage=" file='TopBar_Full_Btn_Hover.png' " pushedimage=" file='TopBar_Full_Btn_Click.png' " />
             <Button name="restorebtn" visible="false" tooltip="还原" float="true" pos="28,0,52,24" width="24" normalimage=" file='TopBar_Window_Btn.png' " hotimage=" file='TopBar_Window_Btn_Hover.png' " pushedimage=" file='TopBar_Window_Btn_Click.png' " />
-            <Button name="closebtn" tooltip="关闭"   float="true" pos="56,0,80,24" width="24" normalimage=" file='TopBar_Close_Btn.png' " hotimage=" file='TopBar_Close_Btn_Hover.png' " pushedimage=" file='TopBar_Close_Btn_Click.png' "/>
+            <Button name="closebtn" tooltip="关闭" float="true" pos="56,0,80,24" width="24" normalimage=" file='TopBar_Close_Btn.png' " hotimage=" file='TopBar_Close_Btn_Hover.png' " pushedimage=" file='TopBar_Close_Btn_Click.png' "/>
           </HorizontalLayout>
         </HorizontalLayout>
       </HorizontalLayout><!-- 标题栏 -->

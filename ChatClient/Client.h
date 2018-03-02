@@ -1,6 +1,10 @@
 #pragma once
 #include "stdafx.h"
 #include "ClientBase.h"
+#include "Common.h"
+#include <list>
+
+using std::list;
 
 class Client : public ClientBase
 {
@@ -19,4 +23,6 @@ public:
 
 	void AssociateWnd(WindowImplBase *wnd);
 	WindowImplBase *wnd;
+	UserAndFriend *user;
+	list<UserAndFriend *> friends;
 };

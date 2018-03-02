@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+  <ListContainerElement name="SessionItem" height="60" width="250">
+    <HorizontalLayout float="false" bkcolor="#E0E0E0">
+      <VerticalLayout width="60">
+        <Button name="HeaderImg" float="true" pos="10,10,0,0" width="40" height = "40" bkcolor="#FFFFFFFF" enabled="false"/>
+      </VerticalLayout>
+      <VerticalLayout width="125">
+        <Label name="NickName" text="Friend" textcolor="#FF000000" font="0" float="true" pos="0,5,130,60"/>
+      </VerticalLayout>
+    </HorizontalLayout>
+  </ListContainerElement>
+</Window>
