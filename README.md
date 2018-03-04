@@ -6,7 +6,7 @@
 一个用duilib写的聊天客户端应用，尚未完成，后续会配套一个服务器端的应用，都是基于Windows平台。
  
 
-    客户端代码：https://github.com/TTGuoying/duilib_ChatClient
+   客户端代码：https://github.com/TTGuoying/duilib_ChatClient
 
 　　服务器代码：https://github.com/TTGuoying/duilib_ChatServer
 
