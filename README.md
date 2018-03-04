@@ -5,13 +5,13 @@
 
 一个用duilib写的聊天客户端应用，尚未完成，后续会配套一个服务器端的应用，都是基于Windows平台
  
- 客户端代码：https://github.com/TTGuoying/duilib_ChatClient
+    客户端代码：https://github.com/TTGuoying/duilib_ChatClient
 
 　　服务器代码：https://github.com/TTGuoying/duilib_ChatServer
 
 　　本软件是本人个人学习duilib UI库过程中创作，所用素材皆取值网络，代码开源用于学习交流只用，如有侵权，请邮件guoying_tan@qq.com告知，立即删除。
 
-　　本软件使用到 duilib UI库 ，sqlite， rapidjson，windows win32编程，网络编程。
+　　本软件使用到 [duilib UI库](https://github.com/duilib/duilib) ，[sqlite](http://www.sqlite.org/index.html)，[RapidJSON GitHub](https://github.com/Tencent/rapidjson/)，windows win32编程，网络编程。
 
 　　开发工具：VS2017
 
