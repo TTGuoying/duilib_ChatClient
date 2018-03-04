@@ -155,9 +155,11 @@
     <Xml Include="..\Bin\Skin\ChatMain.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="..\Bin\Skin\ChatMsgList.xml" />
     <Xml Include="..\Bin\Skin\FriendChatIten.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="..\Bin\Skin\FriendDetail.xml" />
     <Xml Include="..\Bin\Skin\FriendItem.xml">
       <SubType>Designer</SubType>
     </Xml>
@@ -165,6 +167,10 @@
       <SubType>Designer</SubType>
     </Xml>
     <Xml Include="..\Bin\Skin\MyselfChatItem.xml" />
+    <Xml Include="..\Bin\Skin\NewFriend.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\Bin\Skin\NewFriendItem.xml" />
     <Xml Include="..\Bin\Skin\SessionItem.xml">
       <SubType>Designer</SubType>
     </Xml>

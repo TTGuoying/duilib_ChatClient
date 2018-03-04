@@ -18,4 +18,10 @@ enum EM_PROTOCOL
 	GET_FRIENDS,				// 获取好友
 	SEARCH_FRIENDS,				// 查找好友
 	FRIENDS_REQUEST,			// 添加好友请求
+	AGREE_FRIENDS_REQUEST,		// 同意好友请求
+	REFUSE_FRIENDS_REQUEST,		// 拒绝好友请求
+
+	// 聊天
+	SINGLE_CHAT_MSG,			// 单人聊天
+	GROUP_CHAT_MSG,				// 群组聊天
 };

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+  <ListContainerElement name="FriendDetail" height="60" >
+    <HorizontalLayout name="SearchResult" height="60" inset="5,0,0,0">
+      <VerticalLayout width="60"  >
+        <Button name="HeaderImg" float="true" pos="15,10,0,0" width="40" height = "40" bkcolor="#FF000000" enabled="false" bordersize="1,1,1,1" bordercolor="#FF555555"/>
+      </VerticalLayout>
+
+      <VerticalLayout width="205" >
+        <Label name="NickName" text="" textcolor="#FF000000" font="0" float="true" pos="0,10,130,30"/>
+        <Label name="Signture" text="" textcolor="#FF888888" font="1" float="true" pos="0,30,190,50"/>
+      </VerticalLayout>
+
+      <Button name="SendMsg" text="发送信息" textcolor="#FF000000" float="true" pos="260,10,0,0" width="120" height="40" normalimage=" file='Btn_NotClick.png'  corner='5,10,5,10'" hotimage=" file='Btn_Green_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Green_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Green_Hover.png'  corner='5,10,5,10'" font="1"/>
+    </HorizontalLayout>
+  </ListContainerElement>
+</Window>

@@ -1,6 +1,8 @@
 #include "LoginWnd.h"
 #include "Task.h"
 #include "ChatMainWnd.h"
+#include "Client.h"
+#include "ChatMainWnd.h"
 
 LoginWnd::LoginWnd(Client *client, ThreadPool *threadPool)
 
@@ -12,7 +14,6 @@ LoginWnd::LoginWnd(Client *client, ThreadPool *threadPool)
 	stopEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	headerImg = 1;
 	sexulity = 1;
-	client->AssociateWnd(this);
 }
 
 
@@ -57,49 +58,6 @@ CControlUI * LoginWnd::CreateControl(LPCTSTR pstrClass)
 LPCTSTR LoginWnd::GetWindowClassName() const
 {
 	return L"LoginWnd";
-}
-
-LRESULT LoginWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg)
-	{
-
-	case WM_NCLBUTTONDBLCLK:   //禁止双击放大窗口
-		return 0;
-	case WM_USER_RECONNECT:		//重新连接服务器
-		threadPool->QueueTaskItem(Task::Connect, (WPARAM)this, NULL);
-		break;
-	case WM_USER_RECVDATA:		//收到数据
-		threadPool->QueueTaskItem(Task::ProcessRecvDate, wParam, (LPARAM)this);
-		break;
-	case WM_USER_SIGNIN_SUCESS:		//登录成功
-		client->user = (UserAndFriend *)wParam;
-		break;
-	case WM_USER_SIGNIN_FAIL:		//登录失败
-		SetEvent(signInEvent);
-		SetSignInBtnEnable();
-		ShowTip(L"登录失败，用户名或密码错误！", TRUE);
-		break;
-	case WM_USER_SIGNUP_SUCESS:		//注册成功
-		SignUpSuccess();
-		break;
-	case WM_USER_SIGNUP_FAIL:		//注册失败
-		SetEvent(signUpEvent);
-		SetSignUpBtnEnable();
-		ShowTip(L"注册失败，用户名已存在！", TRUE);
-		break;
-	case WM_USER_GET_FRIENDS:		//获取好友
-		if (lParam == 1)
-			SignInBtnSuccess();
-		else
-			client->friends.push_back((UserAndFriend *)wParam);
-		break;
-		
-	default:
-		break;
-	}
-
-	return __super::HandleMessage(uMsg, wParam, lParam);
 }
 
 void LoginWnd::InitWindow()
@@ -347,6 +305,19 @@ void LoginWnd::OnFinalMessage(HWND hWnd)
 	WindowImplBase::OnFinalMessage(hWnd);
 }
 
+LRESULT LoginWnd::OnSysCommand(UINT msg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	// 有时会在收到WM_NCDESTROY后收到wParam为SC_CLOSE的WM_SYSCOMMAND
+	if (wParam == SC_CLOSE)
+	{
+		::PostQuitMessage(0);
+		Close(0);
+		bHandled = TRUE;
+		return 0;
+	}
+	return CWindowWnd::HandleMessage(msg, wParam, lParam);
+}
+
 void LoginWnd::ShowTip(CDuiString tips, BOOL bBarning)
 {
 	if (bBarning)
@@ -393,6 +364,7 @@ void LoginWnd::SignUpSuccess()
 	btnGoSignUp->SetVisible();
 	btnSignIn->SetVisible();
 
+	SetSignUpBtnEnable();
 	btnSignUp->SetVisible(false);
 	btnBack->SetVisible(false);
 	btnOK->SetVisible(false);

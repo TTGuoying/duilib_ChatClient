@@ -1,9 +1,10 @@
 #pragma once
 #include "stdafx.h"
 #include "Common.h"
-#include "Client.h"
 #include "ThreadPool.h"
 
+class Client;
+class ChatMainWnd;
 class LoginWnd : public WindowImplBase
 {
 public:
@@ -19,8 +20,8 @@ public:
 	virtual LPCTSTR GetWindowClassName() const;
 	virtual void InitWindow();
 	virtual void Notify(TNotifyUI &msg);
-	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 	virtual void OnFinalMessage(HWND hWnd);
+	virtual LRESULT OnSysCommand(UINT msg, WPARAM wParam, LPARAM lParam, BOOL & bHandled);
 
 	void ShowTip(CDuiString tips = L"", BOOL bBarning = FALSE);
 	void Connect();

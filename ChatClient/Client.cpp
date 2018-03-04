@@ -1,10 +1,18 @@
 #include "Client.h"
 #include "Common.h"
+#include "LoginWnd.h"
+#include "ChatMainWnd.h"
+#include "Task.h"
 
 Client::Client()
 {
-	wnd = NULL;
+	friends.clear();
+	friendRequests.clear();
+	sessions.clear();
 	user = NULL;
+	loginWnd = NULL;
+	chatMainWnd = NULL;
+	threadPool = new ThreadPool;
 }
 
 
@@ -15,9 +23,13 @@ Client::~Client()
 
 void Client::OnConnectionClosed()
 {
-	if (wnd != NULL)
+	if (loginWnd != NULL)
 	{
-		SendMessage(wnd->GetHWND(), WM_USER_RECONNECT, 0, 0);
+		threadPool->QueueTaskItem(Task::Connect, (WPARAM)loginWnd, NULL);
+	}
+	if (chatMainWnd != NULL && !chatMainWnd->bClose)
+	{
+		chatMainWnd->ConnectClose();
 	}
 }
 
@@ -27,18 +39,10 @@ void Client::OnConnectionError()
 
 void Client::OnRecvCompleted(BYTE * data, int len)
 {
-	if (wnd != NULL)
-	{
-		SendMessage(wnd->GetHWND(), WM_USER_RECVDATA, (WPARAM)data, len);
-	}
+	threadPool->QueueTaskItem(Task::ProcessRecvDate, (WPARAM)data, (LPARAM)this);
 }
 
 void Client::OnSendCompleted()
 {
-}
-
-void Client::AssociateWnd(WindowImplBase * wnd)
-{
-	this->wnd = wnd;
 }
 

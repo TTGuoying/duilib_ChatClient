@@ -103,5 +103,17 @@
     <Xml Include="..\Bin\Skin\AddFriendWnd.xml">
       <Filter>XML</Filter>
     </Xml>
+    <Xml Include="..\Bin\Skin\NewFriendItem.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\NewFriend.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\FriendDetail.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\Bin\Skin\ChatMsgList.xml">
+      <Filter>XML</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

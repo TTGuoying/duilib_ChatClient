@@ -12,6 +12,8 @@ public:
 
 	static int SearchWait(WPARAM wParam, LPARAM lParam = NULL);
 
+	static int ChatListEndDown(WPARAM wParam, LPARAM lParam = NULL);
+
 
 	static void Callback(int result);
 

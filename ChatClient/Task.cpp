@@ -1,6 +1,8 @@
 #include "Task.h"
 #include "LoginWnd.h"
+#include "ChatMainWnd.h"
 #include "AddFriendWnd.h"
+#include "Client.h"
 
 int Task::Connect(WPARAM wParam, LPARAM lParam)
 {
@@ -112,13 +114,22 @@ int Task::ProcessRecvDate(WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	BYTE *data = (BYTE *)wParam;
-	WindowImplBase *wnd = (WindowImplBase *)lParam;
+	Client *client = (Client *)lParam;
 	Document document;
-	if (document.ParseInsitu((char *)data).HasParseError())
+	try
+	{
+		if (document.ParseInsitu((char *)data).HasParseError())
+		{
+			::HeapFree(::GetProcessHeap(), 0, data);
+			return 0;
+		}
+	}
+	catch (...)
 	{
 		::HeapFree(::GetProcessHeap(), 0, data);
 		return 0;
 	}
+	
 	if (!(document.IsObject() && document.HasMember("protocol")))
 	{
 		::HeapFree(::GetProcessHeap(), 0, data);
@@ -139,20 +150,29 @@ int Task::ProcessRecvDate(WPARAM wParam, LPARAM lParam)
 		user->phone = AToW(document["phone"].GetString());
 		user->sexulity = document["sexulity"].GetInt();
 		user->signature = AToW(document["signature"].GetString());
-		SendMessage(wnd->GetHWND(), WM_USER_SIGNIN_SUCESS, (WPARAM)user, 0);
+		client->user = user;
+		//SendMessage(client->wnd->GetHWND(), WM_USER_SIGNIN_SUCESS, 0, 0);
+		client->loginWnd->SignInBtnSuccess();
 		break;
 	}
 	case SIGNIN_FAILED: // 登录失败
-		SendMessage(wnd->GetHWND(), WM_USER_SIGNIN_FAIL, 0, 0);
+		//SendMessage(client->wnd->GetHWND(), WM_USER_SIGNIN_FAIL, 0, 0);
+		SetEvent(client->loginWnd->signInEvent);
+		client->loginWnd->SetSignInBtnEnable();
 		break;
 	case SIGNIN_ALREADY: // 别的地方登录
+		client->chatMainWnd->OtherPlaceSignin();
 		break;
 	case SignUp_SECCUSS: // 注册成功
-		SendMessage(wnd->GetHWND(), WM_USER_SIGNUP_SUCESS, 0, 0);
+		//SendMessage(client->wnd->GetHWND(), WM_USER_SIGNUP_SUCESS, 0, 0);
+		client->loginWnd->SignUpSuccess();
 		break; 
 	case SignUp_FAILED: // 注册失败
-		SendMessage(wnd->GetHWND(), WM_USER_SIGNUP_FAIL, 0, 0);
-			break;
+		//SendMessage(client->wnd->GetHWND(), WM_USER_SIGNUP_FAIL, 0, 0);
+		SetEvent(client->loginWnd->signUpEvent);
+		client->loginWnd->SetSignUpBtnEnable();
+		client->loginWnd->ShowTip(L"注册失败，用户名已存在！", TRUE);
+		break;
 	case GET_FRIENDS: // 获取好友
 	{
 		const Value& friends = document["Friends"];
@@ -160,6 +180,7 @@ int Task::ProcessRecvDate(WPARAM wParam, LPARAM lParam)
 		{
 			break;
 		}
+		client->friends.clear();
 		for (SizeType i = 0; i < friends.Size(); i++)
 		{
 			UserAndFriend * user = new UserAndFriend;
@@ -171,12 +192,16 @@ int Task::ProcessRecvDate(WPARAM wParam, LPARAM lParam)
 			user->phone = AToW(friends[i]["phone"].GetString());
 			user->sexulity = friends[i]["sexulity"].GetInt();
 			user->signature = AToW(friends[i]["signature"].GetString());
-			SendMessage(wnd->GetHWND(), WM_USER_GET_FRIENDS, (WPARAM)user, 0);
+			client->friends.push_back((UserAndFriend *)user);
 		}
-		SendMessage(wnd->GetHWND(), WM_USER_GET_FRIENDS, 0, 1);
+		if (client->chatMainWnd != NULL)
+		{
+			client->chatMainWnd->UpdateFriendList();
+		}
+		//SendMessage(client->wnd->GetHWND(), WM_USER_GET_FRIENDS, 0, 0);
 		break;
 	}
-	case SEARCH_FRIENDS: // 登录
+	case SEARCH_FRIENDS: // 查找好友
 		if (document["result"].GetBool())
 		{
 			UserAndFriend * user = new UserAndFriend;
@@ -188,16 +213,46 @@ int Task::ProcessRecvDate(WPARAM wParam, LPARAM lParam)
 			user->phone = AToW(document["phone"].GetString());
 			user->sexulity = document["sexulity"].GetInt();
 			user->signature = AToW(document["signature"].GetString());
-			SendMessage(wnd->GetHWND(), WM_USER_SEARCH_FRIEND, (WPARAM)user, 0);
+			//SendMessage(client->wnd->GetHWND(), WM_USER_SEARCH_FRIEND, (WPARAM)user, 0);
+			client->chatMainWnd->addFriendWnd->SearchResult(user);
 		}
 		else
 		{
-			SendMessage(wnd->GetHWND(), WM_USER_SEARCH_FRIEND, 0, 0);
+			client->chatMainWnd->addFriendWnd->SearchResult(NULL);
+			//SendMessage(client->wnd->GetHWND(), WM_USER_SEARCH_FRIEND, 0, 0);
 		}
 		break;
-	case 111: // 登录
+	case FRIENDS_REQUEST: // 好友请求
+	{
+		FriendRequest * request = new FriendRequest;
+		request->userID = document["userID"].GetInt();
+		request->account = AToW(document["account"].GetString());
+		request->headerImg = document["headerImg"].GetInt();
+		request->nickName = AToW(document["nickName"].GetString());
+		request->signature = AToW(document["signature"].GetString());
+		request->signature = AToW(document["signature"].GetString());
+		request->operation = -1;
+		//SendMessage(client->wnd->GetHWND(), WM_USER_FRIEND_REQUEST, (WPARAM)request, 0);
+		client->chatMainWnd->OnFriendRequest(request);
+	}
+		break;
+	case AGREE_FRIENDS_REQUEST: // 同意好友请求
+		
+		break;
+	case REFUSE_FRIENDS_REQUEST: // 拒绝好友请求
 
 		break;
+	case SINGLE_CHAT_MSG: // 好友消息
+	{
+		ChatMsgItem * msg = new ChatMsgItem;
+		msg->from = document["from"].GetInt();
+		msg->msg = AToW(document["msg"].GetString());
+		msg->time = AToW(document["time"].GetString());
+		msg->bMyself = false;
+		//SendMessage(client->wnd->GetHWND(), WM_USER_SINGLE_CHAT_MESSAGE, (WPARAM)msg, 0);
+		client->chatMainWnd->RecvSingleMsg(msg);
+		break;
+	}
 	case 1111: // 登录
 
 		break;
@@ -257,4 +312,16 @@ int Task::SearchWait(WPARAM wParam, LPARAM lParam)
 
 	}
 	return 1;
+}
+
+int Task::ChatListEndDown(WPARAM wParam, LPARAM lParam)
+{
+	if (wParam == 0)
+	{
+		return 0;
+	}
+	CListUI *list = (CListUI *)wParam;
+	Sleep(50);
+	list->EndDown();
+	return 0;
 }

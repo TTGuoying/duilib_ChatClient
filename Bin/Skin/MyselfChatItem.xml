@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window>
-  <ListContainerElement name="MsgItem" height="100" >
+  <ListContainerElement name="MsgItem" height="50" >
     <HorizontalLayout float="false" bkcolor="#F5F5F5">
       <VerticalLayout /> <!-- 占空位，占据左边所有的空位-->
-      <VerticalLayout name="MsgContainer" height="90" width="200" bkimage="file='Chat_MyselfBubble.png' corner='15,28,18,11'" inset="8,7,13,7">
+      <VerticalLayout name="MsgContainer" height="40" width="200" bkimage="file='Chat_MyselfBubble.png' corner='15,28,18,11'" inset="8,7,13,7">
         <RichEdit name="message" text="你好" multiline="true" rich="true" font="1" readonly="true" />
       </VerticalLayout>
       <VerticalLayout width="55">
-        <Button name="headerImg" float="true" pos="5,5,0,0" width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
+        <Button name="HeaderImg" float="true" pos="5,5,0,0" width="35" height = "35" bkcolor="#FFFFFFFF" enabled="false"/>
       </VerticalLayout>
     </HorizontalLayout>
   </ListContainerElement>

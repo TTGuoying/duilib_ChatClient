@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Window size="400,300" caption="0,0,0,100" maxinfo="400,600">
   <Font id="0" name="微软雅黑" size="15" bold="false"/>
-  <Font id="1" name="微软雅黑" size="30"/>
+  <Font id="1" name="微软雅黑" size="24"/>
   <Font id="2" name="微软雅黑" size="36" />
 
   <VerticalLayout bkcolor="#FFF5F5F5" bordersize="1,1,1,1" bordercolor="#FF555555" inset="1,1,1,1"> <!--主窗口-->
     <HorizontalLayout height="100" bkcolor="#FF8CCE5F"> <!--标题-->
       <HorizontalLayout width="133"/>
       <Label name="Title" text="登 录" textcolor="#FFF5F5F5" font="2" width="150" align="center"/>
-      <Button name="btnclose" text="×" tooltip="关闭" textcolor="#FFF5F5F5" float="true" pos="370,0,397,30"  hotimage=" file='Btn_Red_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Red_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Red_Hover.png'  corner='5,10,5,10'" font="1"/>
+      <Button name="btnclose" text="X" tooltip="关闭" textcolor="#FFF5F5F5" float="true" pos="370,0,397,30" normalimage=" file='Btn_Red_Click.png'" hotimage=" file='Btn_Red_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Red_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Red_Hover.png'  corner='5,10,5,10'" font="0"/>
     </HorizontalLayout>
     <Label name="Tips" height="30" font="0" align="center"/>
 

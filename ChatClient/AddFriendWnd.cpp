@@ -7,7 +7,7 @@ AddFriendWnd::AddFriendWnd(WindowImplBase *wnd, Client *client, ThreadPool *thre
 	this->client = client;
 	this->threadPool = threadPool;
 	searchEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-	friendID - 0;
+	friendID = 0;
 }
 
 
@@ -70,7 +70,11 @@ void AddFriendWnd::Notify(TNotifyUI & msg)
 		if (msg.pSender == btnSearch)
 		{
 			CDuiString account = edSearch->GetText();
-			if (account == L"")
+			if (account == client->user->account)
+			{
+				ShowTips(L"不能查找自己！", true);
+			}
+			else if (account == L"")
 			{
 				ShowTips(L"请输入查找的账号！", true);
 			}
@@ -98,7 +102,7 @@ void AddFriendWnd::Notify(TNotifyUI & msg)
 		}
 		if (msg.pSender == btnAdd)
 		{
-			if (friendID != 10)
+			if (friendID != 0)
 			{
 				StringBuffer s;
 				Writer<StringBuffer> writer(s);
@@ -118,6 +122,9 @@ void AddFriendWnd::Notify(TNotifyUI & msg)
 					return;
 				}
 				ShowTips(L"好友请求发送成功！");
+				edSearch->SetText(L"");
+				edSearch->SetFocus();
+				btnAdd->SetEnabled(false);
 			}
 			return;
 		}
@@ -130,41 +137,6 @@ LRESULT AddFriendWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_NCLBUTTONDBLCLK:   //禁止双击放大窗口
-		return 0;
-	case WM_USER_SEARCH_FRIEND:
-		SetEvent(searchEvent);
-		if (wParam == NULL)
-		{
-			searchResult->SetVisible(false);
-			ShowTips(L"查找失败，无此账号的用户！", true);
-		}
-		else
-		{
-			UserAndFriend * user = (UserAndFriend *)wParam;
-			CButtonUI *headerImg = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"HeaderImg"));
-			if (headerImg)
-			{
-				CString str;
-				str.Format(L"HeaderImg%1d.png", user->headerImg);
-				headerImg->SetBkImage(str);
-			}
-
-			CLabelUI *nickName = static_cast<CLabelUI *>(m_PaintManager.FindControl(L"NickName"));
-			if (nickName)
-			{
-				nickName->SetText(user->nickName);
-			}
-
-			CLabelUI *signature = static_cast<CLabelUI *>(m_PaintManager.FindControl(L"Signture"));
-			if (signature)
-			{
-				signature->SetText(user->signature);
-			}
-			searchResult->SetVisible();
-			friendID = user->userID;
-			ShowTips(L"查找成功！");
-			delete user;
-		}
 		return 0;
 	default:
 		break;
@@ -195,4 +167,56 @@ void AddFriendWnd::ShowTips(CDuiString tips, BOOL bWarning)
 void AddFriendWnd::SetSearchBtnEnable(BOOL enable)
 {
 	btnSearch->SetEnabled(enable);
+}
+
+void AddFriendWnd::SearchResult(UserAndFriend * user)
+{
+	SetEvent(searchEvent);
+	if (user == NULL)
+	{
+		searchResult->SetVisible(false);
+		ShowTips(L"查找失败，无此账号的用户！", true);
+	}
+	else
+	{
+		auto it = client->friends.begin();
+		for (; it != client->friends.end(); it++)
+		{
+			if ((*it)->userID == user->userID)
+			{
+				btnAdd->SetText(L"已是好友");
+				btnAdd->SetEnabled(false);
+				break;
+			}
+		}
+		if (it == client->friends.end())
+		{
+			btnAdd->SetText(L"加好友");
+			btnAdd->SetEnabled();
+
+		}
+		CButtonUI *headerImg = static_cast<CButtonUI *>(m_PaintManager.FindControl(L"HeaderImg"));
+		if (headerImg)
+		{
+			CString str;
+			str.Format(L"HeaderImg%1d.png", user->headerImg);
+			headerImg->SetBkImage(str);
+		}
+
+		CLabelUI *nickName = static_cast<CLabelUI *>(m_PaintManager.FindControl(L"NickName"));
+		if (nickName)
+		{
+			nickName->SetText(user->nickName);
+		}
+
+		CLabelUI *signature = static_cast<CLabelUI *>(m_PaintManager.FindControl(L"Signture"));
+		if (signature)
+		{
+			signature->SetText(user->signature);
+		}
+		searchResult->SetVisible();
+		friendID = user->userID;
+		ShowTips(L"查找成功！");
+		delete user;
+	}
 }

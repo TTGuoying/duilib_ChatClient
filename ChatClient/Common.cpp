@@ -1,5 +1,5 @@
-#include "Common.h"
 #include "stdafx.h"
+#include "Common.h"
 
 const char* WcharToUtf8(const wchar_t *pwStr)
 {
@@ -80,6 +80,6 @@ CDuiString GetCurrentTimeString()
 	SYSTEMTIME sys;
 	GetLocalTime(&sys);
 	CDuiString str;
-	str.Format(L"%4d/%02d/%02d %02d:%02d:%02d", sys.wYear, sys.wMonth, sys.wDay, sys.wHour, sys.wMinute, sys.wSecond);
+	str.Format(L"%4d-%02d-%02d %02d:%02d:%02d", sys.wYear, sys.wMonth, sys.wDay, sys.wHour, sys.wMinute, sys.wSecond);
 	return str;
 }

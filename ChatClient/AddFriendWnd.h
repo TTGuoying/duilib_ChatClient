@@ -23,6 +23,8 @@ public:
 	void ShowTips(CDuiString tips = L"", BOOL bBarning = FALSE);
 	void SetSearchBtnEnable(BOOL enable = TRUE);
 
+	void SearchResult(UserAndFriend * user);
+
 	HANDLE searchEvent;
 	ULONG friendID;
 

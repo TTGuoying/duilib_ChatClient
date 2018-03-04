@@ -3,9 +3,12 @@
 #include "ClientBase.h"
 #include "Common.h"
 #include <list>
+#include "ThreadPool.h"
 
 using std::list;
 
+class LoginWnd;
+class ChatMainWnd;
 class Client : public ClientBase
 {
 public:
@@ -21,8 +24,13 @@ public:
 	// Ð´²Ù×÷Íê³É
 	virtual void OnSendCompleted();
 
-	void AssociateWnd(WindowImplBase *wnd);
-	WindowImplBase *wnd;
+	LoginWnd *loginWnd;
+	ChatMainWnd *chatMainWnd;
 	UserAndFriend *user;
+
+	ThreadPool *threadPool;
+
+	list<SessionItem *> sessions;
 	list<UserAndFriend *> friends;
+	list<FriendRequest *> friendRequests;
 };

@@ -10,8 +10,8 @@
     <VerticalLayout width="60" bkcolor="#FF222222"> <!--左 头像区域 -->
       <HorizontalLayout>
         <Button name="MyheaderImg" tooltip="" float="true" pos="12,12,47,47" width="36" height = "36"/>
-        <Option name="Chatting" float="true" pos="18,73,42,97" width="24" height = "24" group="true" selected="true" normalimage=" file='recent_btn_nor.png' " hotimage="recent_btn_pressed" selectedimage="file='recent_btn_pressed.png' "/>
-        <Option name="Contacts" float="true" pos="18,123,42,147" width="24" height = "24" group="true" normalimage=" file='contact_btn_nor.png' " hotimage="contact_btn_pressed" selectedimage="file='contact_btn_pressed.png' "/>
+        <Option name="Session" float="true" pos="18,73,42,97" width="24" height = "24" group="true" selected="true" bkimage="file='recent_btn_nor.png'" hotimage="recent_btn_pressed" selectedimage="file='recent_btn_pressed.png' "/>
+        <Option name="Contact" float="true" pos="18,123,42,147" width="24" height = "24" group="true"  bkimage="file='contact_btn_nor.png'" hotimage="contact_btn_pressed" selectedimage="file='contact_btn_pressed.png' "/>
       </HorizontalLayout>
       <HorizontalLayout height="60">
         <Button name="Setting" float="true" pos="12,12,47,47" width="36" height = "36" normalimage=" file='TabBar_Setting_Btn.png' " hotimage=" file='TabBar_Setting_Btn_Click.png' " pushedimage=" file='TabBar_Setting_Btn_Hover.png' "/>
@@ -27,7 +27,7 @@
         </HorizontalLayout> <!--搜索-->
         <HorizontalLayout height="60" bkcolor="#FFEFEFEF">
           <HorizontalLayout inset="15,15,15,15"> <!--当前聊天的名字-->
-            <Label name="ChatNickName" text="Friend" textcolor="#FF000000" font="2" />
+            <Label name="Title" text="" textcolor="#FF000000" font="2" />
           </HorizontalLayout> <!-- 占空位，占据左边所有的空位-->
           <HorizontalLayout width="80">
             <!-- 右边三个控件所占的宽度-->
@@ -43,7 +43,8 @@
         <HorizontalLayout> <!--聊天-->
           <List name="SessionList" width="250" vscrollbar="true" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFD0D0D0" itemhotbkcolor="#FFE0E0E0" header="hidden"/> <!--会话列表-->
           <VerticalLayout name="ChatView" visible="false"> <!--右-->
-            <List name="ChatRoom" vscrollbar="true" float="false" bkcolor="#FFF5F5F5" itemselectedbkcolor="#FFF5F5F5" itemhotbkcolor="#FFF5F5F5" header="hidden"/> <!--会话列表-->
+            <Container name="ChatRoom" bkcolor="#FF22EFEF"/> <!--会话列表-->
+            <!--<List name="ChatRoom" vscrollbar="true" float="false" bkcolor="#FFF5F5F5" itemselectedbkcolor="#FFF5F5F5" itemhotbkcolor="#FFF5F5F5" header="hidden"/> -->
             <HorizontalLayout height="30" bkcolor="#FFFAFAFA"> <!-- 表情区域 -->
                 <Button name="Expression" tooltip="表情" float="true" pos="10,0,0,0" width="32" height="29" normalimage=" file='Chat_Expression_Icon.png' " hotimage=" file='Chat_Expression_Icon_Hover.png' " pushedimage=" file='Chat_Expression_Icon_Active.png' "/>
                 <Button name="File" tooltip="文件" float="true" pos="50,0,0,0" width="32" height="29" normalimage=" file='Chat_SendFile_Icon.png' " hotimage=" file='Chat_SendFile_Icon_Hover.png' " pushedimage=" file='Chat_SendFile_Icon_Active.png' "/>
@@ -55,15 +56,26 @@
             <HorizontalLayout height="30" bkcolor="#FFFFFFFF">
               <VerticalLayout />
               <VerticalLayout width="100" >
-                <Button name="SendBtn" text="发送" tooltip="发送" float="true" pos="10,0,0,0" width="70" height="25" bkcolor="#FFEEEEEE" textcolor="#FF000000" font="0" />
+                <Button name="SendBtn" text="发送" tooltip="发送" float="true" pos="10,0,0,0" width="70" height="25" bkcolor="#FFEEEEEE" bordersize="1,1,1,1" bordercolor="#FFD8D8D8" focusbordercolor="#FF459E34" textcolor="#FF000000" hottextcolor="#FF459B34" pushedtextcolor="#FF306824" font="0" />
               </VerticalLayout>
             </HorizontalLayout>
           </VerticalLayout>
         </HorizontalLayout> <!--聊天-->
 
         <HorizontalLayout> <!--联系人-->
-          <List name="ContactList" width="250" vscrollbar="true" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFD0D0D0" itemhotbkcolor="#FFE0E0E0" header="hidden"/> <!--联系人列表-->
-          <List name="ContactDetail" vscrollbar="true" bkcolor="#FFF5F5F5"/> <!--联系人详情-->
+          <List name="ContactList" width="250" vscrollbar="true" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFD0D0D0" itemhotbkcolor="#FFE0E0E0" header="hidden">
+            <ListContainerElement name="NewFriend" height="60" width="250">
+              <HorizontalLayout float="false" bkcolor="#E0E0E0">
+                <VerticalLayout width="60">
+                  <Button name="NewFriendHeadImg" float="true" pos="10,10,0,0" width="40" height = "40" bkimage=" file='Default_Gray.png' " enabled="false"/>
+                </VerticalLayout>
+                <VerticalLayout width="125">
+                  <Label name="NickName" text="新的朋友" textcolor="#FF000000" font="0" float="true" pos="0,5,130,60"/>
+                </VerticalLayout>
+              </HorizontalLayout>
+            </ListContainerElement>
+          </List> <!--联系人列表-->
+          <List name="ContactDetail" vscrollbar="true" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFEFEFEF" itemhotbkcolor="#FFEFEFEF" header="hidden"/> <!--联系人详情-->
         </HorizontalLayout> <!--联系人-->
         
       </TabLayout> <!--中右下-->
