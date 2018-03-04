@@ -3,8 +3,9 @@
 *A chat app client than the ui base on duilib and with network communications! This project is not completed!
  
 
-一个用duilib写的聊天客户端应用，尚未完成，后续会配套一个服务器端的应用，都是基于Windows平台
+一个用duilib写的聊天客户端应用，尚未完成，后续会配套一个服务器端的应用，都是基于Windows平台。
  
+
     客户端代码：https://github.com/TTGuoying/duilib_ChatClient
 
 　　服务器代码：https://github.com/TTGuoying/duilib_ChatServer
