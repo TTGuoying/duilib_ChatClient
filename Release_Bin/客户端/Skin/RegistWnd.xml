@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="400,600" caption="0,0,0,100" maxinfo="400,600">
+  <Font id="0" name="微软雅黑" size="15" bold="false" default="true" />
+  <Font id="1" name="微软雅黑" size="24"/>
+  <Font id="2" name="微软雅黑" size="36" />
+
+  <VerticalLayout bordersize="1,1,2,2" bordercolor="#FF555555" inset="1,1,1,1">
+    <!--主窗口-->
+    <HorizontalLayout height="100" bkcolor="#FF8CCE5F">
+      <!--标题-->
+      <HorizontalLayout width="133"/>
+      <Label text="注 册" textcolor="#FFF5F5F5" font="2" width="150" align="center"/>
+      <Button name="btnclose" text="×" tooltip="关闭"  float="true" pos="373,0,397,30"  hotimage=" file='Btn_Red_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Red_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Red_Hover.png'  corner='5,10,5,10'" font="1"/>
+    </HorizontalLayout>
+
+    <HorizontalLayout bkcolor="#FFF5F5F5">
+
+      <VerticalLayout inset="0,10, 30,0">
+
+        <HorizontalLayout inset="40,10, 30,0" height="65">
+          <Label text="头像：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Option name="Chatting" float="true" pos="125,15,0,0"  width="40" height = "40" group="true" selected="true" normalimage=" file='no_chat_bg.png' " hotimage="default.png" selectedimage="file='default.png' "/>
+          <Option name="Chatting" float="true" pos="175,15,0,0"  width="40" height = "40" group="true" normalimage=" file='no_chat_bg.png' " hotimage="default.png" selectedimage="file='default.png' "/>
+          <Option name="Chatting" float="true" pos="225,15,0,0"  width="40" height = "40" group="true" normalimage=" file='no_chat_bg.png' " hotimage="default.png" selectedimage="file='default.png' "/>
+          <Option name="Chatting" float="true" pos="275,15,0,0"  width="40" height = "40" group="true" normalimage=" file='no_chat_bg.png' " hotimage="default.png" selectedimage="file='default.png' "/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="账号：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Account" height="35" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="密码：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Password" height="35" width="200" inset="5,5, 1,1" password="true"  bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="确认密码：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="ComfigPassword" height="35" width="200" inset="5,5, 1,1" password="true"  bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="昵称：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="NickName" height="35" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="个性签名：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Sign" height="35" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="性别：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Combo name="Sexuality" float="true" pos="120, 15, 300, 42" normalimage="file='Setting_Combox_Normal.png' corner='10,10,35,10'" hotimage="file='Setting_Combox_Hover.png' corner='10,10,35,10'" pushedimage="file='Setting_Combox_Click.png' corner='10,10,35,10'"
+			combowndbkimage="file='Setting_Combox_List_BG.png' corner='10,10,10,10'" textpadding="1,1,1,1" itemfont="0" >
+            <ListLabelElement text=" 男 / Man" selected="true" font="0"/>
+            <ListLabelElement text=" 女 / Female" font="0"/>
+          </Combo>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="地区：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Area" height="35" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+
+        <HorizontalLayout inset="40,10, 30,0" height="45">
+          <Label text="电话：" textcolor="#FF000000" font="0" width="80" align="right"/>
+          <Edit name="Phone" height="35" width="200" inset="5,5, 1,1" bkcolor="#FFFFFFFF" bordersize="1,1,1,1" bordercolor="#FF555555" font="0"/>
+        </HorizontalLayout>
+        
+      </VerticalLayout>
+    </HorizontalLayout>
+
+    <HorizontalLayout  bkcolor="#FFF5F5F5" height="50">
+      <Button name="Back" text="返回" textcolor="#FF000000" float="true" pos="60,0,0,0" width="120" height="40" normalimage=" file='Btn_NotClick.png'  corner='5,10,5,10'" hotimage=" file='Btn_Green_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Green_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Green_Hover.png'  corner='5,10,5,10'" font="0"/>
+      <Button name="SignUp" text="注册" textcolor="#FF000000" float="true" pos="220,0,0,0" width="120" height="40" normalimage=" file='Btn_NotClick.png'  corner='5,10,5,10'" hotimage=" file='Btn_Green_Hover.png'  corner='5,10,5,10'" pushedimage=" file='Btn_Green_Click.png'  corner='5,10,5,10'" focusedimage="file='Btn_Green_Hover.png'  corner='5,10,5,10'" font="0"/>
+    </HorizontalLayout>
+  </VerticalLayout>
+  <!--主窗口-->
+</Window>

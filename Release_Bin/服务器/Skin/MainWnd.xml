@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="600,400" caption="0,0,0,100">
+  <Font id="0" name="微软雅黑" size="14" bold="false"/>
+  <Font id="1" name="微软雅黑" size="30"/>
+  <Font id="2" name="微软雅黑" size="16" />
+
+  <VerticalLayout bkcolor="#FFF5F5F5" bordersize="1,1,1,1" bordercolor="#FF555555" inset="1,1,1,1">
+    
+    <HorizontalLayout height="32"  bkcolor="#FF8CCE5F" inset="5,0,0,0">
+      <VerticalLayout width="30">
+        <Button name="logo" tooltip="聊天服务器" float="true" pos="0,3,24,27" bkcolor="#FFFFFFFF"/>
+      </VerticalLayout>
+      <Label name="Title" text="聊天服务器" textcolor="#FFFFFFFF" font="2" />
+      <HorizontalLayout width="83" >
+        <!-- 右边三个控件所占的宽度-->
+        <Button name="minbtn" tooltip="最小化" float="true" pos="0,3,24,27"  width="24" normalimage=" file='TopBar_Narrow_Btn.png' " hotimage=" file='TopBar_Narrow_Btn_Hover.png' " pushedimage=" file='TopBar_Narrow_Btn_Click.png' "/>
+        <Button name="maxbtn"   tooltip="最大化" float="true" pos="28,3,52,27" width="24" normalimage=" file='TopBar_Full_Btn.png' " hotimage=" file='TopBar_Full_Btn_Hover.png' " pushedimage=" file='TopBar_Full_Btn_Click.png' " />
+        <Button name="restorebtn" visible="false" tooltip="还原" float="true" pos="28,3,52,27" width="24" normalimage=" file='TopBar_Window_Btn.png' " hotimage=" file='TopBar_Window_Btn_Hover.png' " pushedimage=" file='TopBar_Window_Btn_Click.png' " />
+        <Button name="closebtn" tooltip="关闭"   float="true" pos="56,3,80,27" width="24" normalimage=" file='TopBar_Close_Btn.png' " hotimage=" file='TopBar_Close_Btn_Hover.png' " pushedimage=" file='TopBar_Close_Btn_Click.png' "/>
+      </HorizontalLayout>
+    </HorizontalLayout>
+
+
+    <HorizontalLayout>
+      <list name="OnlineList" vscrollbar="true" bkcolor="#FFEFEFEF" itemselectedbkcolor="#FFD0D0D0" itemhotbkcolor="#FFE0E0E0" >
+
+      </list>
+
+      <HorizontalLayout>
+
+      </HorizontalLayout>
+    </HorizontalLayout>
+    
+    
+    <HorizontalLayout height="30" inset="10,0,0,0" bkcolor="#FFEEEEEE">
+      <Label name="Tips" height="30" font="0"/>
+    </HorizontalLayout>
+  </VerticalLayout>
+</Window>

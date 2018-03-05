@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window>
+  <List name="ChatMsgList" vscrollbar="true" float="false" bkcolor="#FFF5F5F5" itemselectedbkcolor="#FFF5F5F5" itemhotbkcolor="#FFF5F5F5" header="hidden"/> 
+</Window>
