@@ -1,0 +1,8 @@
+客户端有bug，有时会崩溃
+
+github：https://github.com/TTGuoying/duilib_ChatClient
+个人博客：http://cnblogs.com/tanguoying
+
+所有资源均取自网络，如有侵权请发邮件到guoying_tan@qq.com告知
+
+谢谢
